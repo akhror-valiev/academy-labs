@@ -1,0 +1,58 @@
+{% assign mian_menu_linklist = linklists[section.settings.menu].links %}
+<header class="header">
+  <div class="container">
+    <div class="logo">
+      <a href="/">
+        {{ section.settings.header_menu }}
+      </a>
+    </div>
+    <nav class="main-nav">
+        {% for link in linklists.main-menu.links %}
+            {% if link.links != blank %}
+                <div class="relative">
+                    <button type="button">
+                        {{ link.title }}
+                    </button>
+                </div>
+                {% else %}    
+                <ul>
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {% render 'icon-chevron-down' %}
+                </ul>
+            {% endif %}
+        {% endfor %}
+    </nav>
+    <div class="icon-items">
+     <a href="">
+        {% render 'icon-search-item' %}
+     </a>
+     <a href="Login">
+        {% render 'icon-heart' %}
+     </a>
+     <a href="{{ routes.cart_url }}">
+        {% render 'icon-cart-item' %}
+     </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+    "name": "Header",
+    "settings": [
+        {
+            "type": "text",
+            "id": "header_menu",
+            "label": "Title",
+            "default": "Menu",
+            "info": "This is for Title change"
+        },
+        {
+            "type": "link_list",
+            "id": "menu",
+            "label": "Header Menu",
+            "default": "main-menu"
+        }
+    ]
+}
+{% endschema %}
