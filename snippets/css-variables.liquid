@@ -1,0 +1,39 @@
+<!-- assets/css-vars.liquid -->
+
+<style>
+  /* Define CSS variables for color scheme */
+  :root {
+    {% case section.settings.active_color_scheme %}
+      {% when 'scheme-1' %}
+        --primary-color: #FF5733;
+        --secondary-color: #3498db;
+        --accent-color: #f39c12;
+      {% when 'scheme-2' %}
+        --primary-color: #27ae60;
+        --secondary-color: #9b59b6;
+        --accent-color: #e74c3c;
+      {% when 'scheme-3' %}
+        --primary-color: #34495e;
+        --secondary-color: #f1c40f;
+        --accent-color: #2c3e50;
+    {% endcase %}
+  }
+
+  /* Define CSS variables for typography */
+  :root {
+    {% case section.settings.heading_font %}
+      {% when 'Barlow' %}
+        --heading-font-family: 'Barlow', sans-serif;
+        --heading-font-weight: bold;
+      {% when 'Poppins' %}
+        --heading-font-family: 'Poppins', sans-serif;
+        --heading-font-weight: 600; /* SemiBold */
+    {% endcase %}
+
+    {% case section.settings.body_font %}
+      {% when 'Poppins' %}
+        --body-font-family: 'Poppins', sans-serif;
+        --body-font-weight: normal;
+    {% endcase %}
+  }
+</style>

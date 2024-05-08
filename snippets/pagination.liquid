@@ -1,0 +1,93 @@
+{% if pagination.pages > 1 %}
+    <nav role="navigation">
+        {% if pagination.previous %}
+            <a href="{{ pagination.previous.url }}" class="pagination-chevron">{% render 'icon-left-chevron' %}</a>
+        {% endif %}
+  
+        {% assign totalPages = pagination.pages %}
+        {% assign currentPage = pagination.current_page %}
+        {% assign maxPages = 5 %}
+        
+        {% assign startPage = 1 %}
+        {% assign endPage = totalPages %}
+        
+        {% if totalPages > maxPages %}
+            {% assign halfMaxPages = maxPages | divided_by: 2 %}
+            {% assign startPage = currentPage | minus: halfMaxPages | ceil %}
+            {% assign endPage = startPage | plus: maxPages | minus: 1 %}
+            {% if endPage > totalPages %}
+                {% assign startPage = totalPages | minus: maxPages | plus: 1 %}
+                {% assign endPage = totalPages %}
+            {% endif %}
+        {% endif %}
+        
+        {% if startPage > 1 %}
+            <a href="{{ paginate.url }}" class="pagination-link">1</a>
+            {% if startPage > 2 %}
+                <span class="pagination-link">...</span>
+            {% endif %}
+        {% endif %}
+        
+        {% for page in (startPage..endPage) %}
+            {% if page == currentPage %}
+                <span class="pagination-link current-page">{{ page }}</span>
+            {% else %}
+                <a href="{{ paginate.url }}?page={{ page }}" class="pagination-link">{{ page }}</a>
+            {% endif %}
+        {% endfor %}
+        
+        {% if endPage < totalPages %}
+            {% assign totalPagesMinus1 = totalPages | minus: 1 %}
+            {% if endPage < totalPagesMinus1 %}
+                <span class="pagination-link">...</span>
+            {% endif %}
+            <a href="{{ paginate.url }}?page={{ totalPages }}" class="pagination-link">{{ totalPages }}</a>
+        {% endif %}
+        
+        {% if pagination.next %}
+            <a href="{{ pagination.next.url }}" class="pagination-chevron">{% render 'icon-right-chevron' %}</a>
+        {% endif %}
+       
+    </nav>
+  {% endif %}
+
+
+  
+  <style>
+    /* Pagination Container */
+    nav[role="navigation"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    }
+
+    /* Pagination Link */
+    .pagination-link {
+    border: 1px solid #EF3636;
+    color: #EF3636;
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+    border-radius: 50%; 
+    font-weight: 500;
+    text-decoration: none;
+    width: 1rem;
+    text-align: center;
+    }
+
+    .current-page {
+    background-color: #EF3636;
+    color: #ffffff;
+    }
+
+    /* Pagination Chevron */
+    .pagination-chevron {
+    color: #EF3636;
+    text-decoration: none;
+    margin: 0 0.5rem; /* Adjust as needed */
+    }
+
+  </style>
+  
+

@@ -1,0 +1,88 @@
+<div class="header-image">
+    {% if section.settings.background_image != blank %}
+        <img src="{{ section.settings.background_image | image_url }}" width="1920" height="717" loading="lazy" alt="Background image">
+    {% else %}
+    <img src="{{ 'backg.jpeg' | asset_img_url: 'large' }}" class="header-img" width="1920" height="717">
+    {% endif %}
+    <div class="overlay">
+      <div class="header-text">
+        <div class="text-group">
+            {% if section.settings.title_text != blank %}
+                <h1>{{ section.settings.title_text }}</h1>
+                <p>{{ section.settings.paragrph_text }}</p>
+            {% else %}
+                <h1 class="title-typo">CHOOSE YOUR SHOES WITH US NOW.</h1>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias deleniti expedita incidunt tempora distinctio labore praesentium!</p>
+            {% endif %}
+            <a href="#" class="button">Button Text</a>
+        </div>
+        <div>
+            {% if section.settings.background_image_secondary != blank %}
+                <img src="{{ section.settings.background_image_secondary | image_url }}" width="570" height="617" loading="lazy" alt="Background image">
+            {% else %}
+            <img src="{{ 'shoe.png' | asset_img_url: 'large' }}" class="header-img" width="570" height="617">
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <style>
+  .title-typo {
+    color: {{ section.settings.text_color }}
+    ;
+  }
+</style>
+
+
+
+  {% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#000000"
+    },
+    {
+        "type": "image_picker",
+            "id": "background_image",
+            "label": "Change Background",
+            "info": "Chamging home background image"
+    },
+    {
+        "type": "image_picker",
+            "id": "background_image_secondary",
+            "label": "Change Background",
+            "info": "Chamging secondary background image"
+    },
+    {
+        "type": "text",
+        "id": "title_text",
+        "label": "Title",
+        "info": "Change Title"
+    },
+    {
+        "type": "richtext",
+        "id": "paragrph_text",
+        "label": "Paragraph",
+        "info": "Change Paragraph"
+    },
+    {
+      "type": "link_list",
+      "id": "read_more_button",
+      "label": "Read More"
+    }
+        ],
+        "presets": []
+  }
+  {% endschema %}

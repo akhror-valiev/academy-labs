@@ -3,7 +3,11 @@
   <div class="container">
     <div class="logo">
       <a href="/">
-        {{ section.settings.header_menu }}
+      {% if section.settings.header_logo != blank %}
+        <img src="{{ section.settings.header_logo | image_url }}" width="106" height="24" loading="lazy" alt="Header Logo">
+      {% else %}
+        <img src="{{ "Miralou.png" | asset_url }}" width="106" height="24" loading="lazy" alt="Header Logo" >
+      {% endif %}
       </a>
     </div>
     <nav class="main-nav">
@@ -14,7 +18,7 @@
                         {{ link.title }}
                     </button>
                 </div>
-                {% else %}    
+                {% else %}
                 <ul>
                   <li><a href="{{ link.url }}">{{ link.title }}</a></li>
                   {% render 'icon-chevron-down' %}
@@ -36,23 +40,44 @@
   </div>
 </header>
 
+<style>
+  .header {
+    background: {{ section.settings.background }}
+    ;
+    color: {{ section.settings.chevron_color }}
+    ;
+  }
+</style>
+
 {% schema %}
 {
     "name": "Header",
     "settings": [
         {
-            "type": "text",
-            "id": "header_menu",
-            "label": "Title",
-            "default": "Menu",
-            "info": "This is for Title change"
+            "type": "image_picker",
+            "id": "header_logo",
+            "label": "Header logo",
+            "info": "Change header logo supported png"
         },
+        {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "chevron_color",
+      "label": "Chevron color",
+      "default": "#000000"
+    },
         {
             "type": "link_list",
             "id": "menu",
             "label": "Header Menu",
             "default": "main-menu"
         }
-    ]
+    ],
+    "presets": []
 }
 {% endschema %}

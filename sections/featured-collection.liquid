@@ -1,0 +1,240 @@
+<div>
+  <div class="feature-container">
+    <div class="trapezoid"></div>
+    <div class="content">
+      <div class="text-groups">
+        <h1>{{ section.settings.section_title }}</h1>
+        <p>{{ section.settings.section_subtitle }}</p>
+      </div>
+      <div class="img-container">
+        <div class="feature-img">
+          <div class="img-text">
+            <h3 class="feature-title">WOMEN</h3>
+            <p class="feature-paragraph">115 PRODUCTS</p>
+          </div>
+          <img src="{{ "img-1.png" | asset_url }}" width="390" height="431" loading="lazy" alt="Image one">
+        </div>
+        <div class="feature-img">
+          <div class="img-text">
+            <h3 class="feature-title">MEN</h3>
+            <p class="feature-paragraph">115 PRODUCTS</p>
+          </div>
+          <img src="{{ "img-2.png" | asset_url }}" width="390" height="431" loading="lazy" alt="Image two">
+        </div>
+        <div class="feature-img">
+          <div class="img-text">
+            <h3 class="feature-title">KIDS</h3>
+            <p class="feature-paragraph">115 PRODUCTS</p>
+          </div>
+          <img src="{{ "img-3.png" | asset_url }}" width="390" height="431" loading="lazy" alt="Image three">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col items-center my-8">
+    <h4>Our Products</h4>
+    <div class="product-grid">
+      {% paginate section.settings.featured_collection.products by 4 %}
+        <div data-next-url="{{ paginate.next.url }}">
+
+       
+        {% for product in section.settings.featured_collection.products %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+        </div>
+        {% if paginate.next %}
+          <div class="pagination-container">
+            <button class="load-more-btn">Load more</button>
+            <div class="load-more-spinner"></div>
+          </div>
+        {% endif %}
+      {% endpaginate %}
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .feature-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+.trapezoid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160%;
+  height: 100%;
+  background-color: #000000;
+  clip-path: polygon(0 0, 100% 0, 0% 90%, 0% 60%);
+  z-index: -1; 
+  overflow: hidden;
+}
+
+.content {
+  position: relative; /* Ensure content is positioned relative to feature-container */
+  z-index: 1; /* Ensure content appears above the trapezoid */
+}
+
+.text-groups {
+  text-align: start;
+  padding: 4% 0 0 9%;
+  width: 50%;
+}
+
+.text-groups h1 {
+    color: #EF3636;
+}
+.text-groups p {
+    color: #989898;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  align-items: flex-start; /* Align items at the start */
+}
+
+.feature-img {
+  position: relative;
+  text-align: center;
+}
+
+.feature-img .img-text {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  left: calc(65% + 5px); 
+  padding: 40px 0;
+  color: white;
+  border-radius: 5px;
+}
+.img-text h3 {
+    color:#EF3636;
+;
+}
+.img-text p{
+    color: #F6F6F6;
+}
+
+.feature-title,
+.feature-paragraph {
+  margin: 0;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.my-8 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr)); /* For small screens */
+    gap: 1rem; /* Adjust the gap as needed */
+}
+
+@media (min-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr)); /* For medium screens and above */
+    }
+}
+
+
+</style>
+
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "SHOP BY CATEGORY"
+    },
+    {
+      "type":"collection",
+      "id": "featured_collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
+      "default": "Pick a category"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1",
+      "info": "Select the first image"
+    },
+    {
+      "type": "text",
+      "id": "image_1_title",
+      "label": "Image 1 Title",
+      "default": "WOMEN"
+    },
+    {
+      "type": "text",
+      "id": "image_1_products",
+      "label": "Image 1 Products",
+      "default": "115 PRODUCTS"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2",
+      "info": "Select the second image"
+    },
+    {
+      "type": "text",
+      "id": "image_2_title",
+      "label": "Image 2 Title",
+      "default": "MEN"
+    },
+    {
+      "type": "text",
+      "id": "image_2_products",
+      "label": "Image 2 Products",
+      "default": "90 PRODUCTS"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3",
+      "info": "Select the third image"
+    },
+    {
+      "type": "text",
+      "id": "image_3_title",
+      "label": "Image 3 Title",
+      "default": "KIDS"
+    },
+    {
+      "type": "text",
+      "id": "image_3_products",
+      "label": "Image 3 Products",
+      "default": "75 PRODUCTS"
+    }
+  ]
+}
+
+{% endschema %}
+

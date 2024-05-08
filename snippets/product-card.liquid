@@ -1,0 +1,92 @@
+<div class="product-card">
+    {% if product.featured_image %}
+        <div class="product-image-container">
+            <img src="{{ product.featured_image.src | img_url: 'medium' }}" alt="{{ product.title }}" class="product-image-modal-trigger">
+        </div>
+    {% else %}
+        {{ 'product-1' |  placeholder_svg_tag }}
+    {% endif %}
+    <div class="product-details">
+        <p class="brand">{{ product.vendor }}</p>
+        <p class="model">{{ product.title }}</p>
+        <p class="price">{{ product.price | money }}</p>
+        <a href="{{ product.url }}" class="view-button">View</a>
+    </div>
+</div>
+
+<div id="productImageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("productImageModal");
+    // Get the image and insert it inside the modal
+    var modalImg = document.getElementById("modalImage");
+    // Get all elements with the class "product-image-modal-trigger"
+    var images = document.getElementsByClassName("product-image-modal-trigger");
+    // Loop through each image and attach the click event listener
+    for (var i = 0; i < images.length; i++) {
+        images[i].onclick = function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        };
+    }
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+</script>
+
+<style>
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
+    .modal-content {
+        margin: 30px auto 0; /* Adjust margin-top as needed */
+        display: block;
+        width: 70%; /* Adjust as needed */
+        height: 90%; /* Adjust as needed */
+    }
+    .close {
+        color: #FFF;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 35px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    /* Zoom Effect */
+    .product-image-container {
+        overflow: hidden;
+        position: relative;
+    }
+    .product-image-modal-trigger {
+        transition: transform 0.3s ease;
+    }
+    .product-image-modal-trigger:hover {
+        transform: scale(1.1);
+    }
+</style>
