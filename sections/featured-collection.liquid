@@ -32,16 +32,17 @@
     </div>
   </div>
   <div class="flex flex-col items-center my-8">
-    <h4>Our Products</h4>
+
+  
+  <div class="featured-title">
+    <h2>Our Products</h2>
+  </div>
+   
     <div class="product-grid">
       {% paginate section.settings.featured_collection.products by 4 %}
-        <div data-next-url="{{ paginate.next.url }}">
-
-       
         {% for product in section.settings.featured_collection.products %}
           {% render 'product-card', product: product %}
         {% endfor %}
-        </div>
         {% if paginate.next %}
           <div class="pagination-container">
             <button class="load-more-btn">Load more</button>
@@ -140,17 +141,24 @@
 .my-8 {
     margin-top: 2rem;
     margin-bottom: 2rem;
+    text-align: center;
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr)); /* For small screens */
-    gap: 1rem; /* Adjust the gap as needed */
+    grid-template-columns: repeat(1, minmax(0, 1fr)); 
+    gap: 1rem; 
+}
+
+.featured-title{
+  width: 85%;
+  display: flex;
+  align-items: start;
 }
 
 @media (min-width: 768px) {
     .product-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr)); /* For medium screens and above */
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }
 

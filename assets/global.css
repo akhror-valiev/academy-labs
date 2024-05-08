@@ -69,6 +69,7 @@
 
 .header-image {
     position: relative;
+    margin-bottom: -5px;
 }
 
 .overlay {
@@ -80,7 +81,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.75);
 }
 
 .header-text {
