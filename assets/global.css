@@ -15,6 +15,7 @@
 
 .main-nav {
     display: flex;
+    align-items: center;
     gap: 40px;
 }
 
@@ -34,12 +35,31 @@
 
 .main-nav ul li:last-child {
     margin-right: 0;
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
 .main-nav ul li a {
     text-decoration: none;
     color: #333333;
     font-weight: bold;
+}
+
+
+/* Active link styling */
+
+.main-nav ul li a.active {
+    color: red;
+    /* Change active link color */
+}
+
+
+/* Hover effect */
+
+.main-nav ul li a:hover {
+    color: #ccc;
+    /* Change hover color */
 }
 
 .icon-items {
@@ -61,7 +81,6 @@
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
-    /* Adjust the overlay background color and opacity as needed */
 }
 
 .header-text {
@@ -69,7 +88,6 @@
     text-align: left;
     color: #ffffff;
     align-items: center;
-    /* Change the text color as needed */
 }
 
 .text-group {
@@ -78,36 +96,26 @@
 
 .header-text h1 {
     font-size: 2rem;
-    /* Adjust the font size as needed */
     margin-bottom: 10px;
-    /* Adjust the margin as needed */
 }
 
 .header-text p {
     font-size: 1.2rem;
-    /* Adjust the font size as needed */
     margin-bottom: 20px;
-    /* Adjust the margin as needed */
 }
 
 .button {
     display: inline-block;
     padding: 10px 20px;
-    /* Adjust the padding as needed */
     background-color: grey;
-    /* Change the background color as needed */
     color: #ffffff;
-    /* Change the text color as needed */
     text-decoration: none;
     border-radius: 5px;
-    /* Adjust the border radius as needed */
     transition: background-color 0.3s ease;
-    /* Add transition for smooth hover effect */
 }
 
 .button:hover {
     background-color: black;
-    /* Change the hover background color as needed */
     color: grey;
 }
 
@@ -263,4 +271,67 @@
 
 .font-medium {
     font-weight: 500;
+}
+
+.custom-dropdown {
+    position: absolute;
+    z-index: 10;
+    margin-left: -1.25rem;
+    /* -ml-5 in tailwind */
+    margin-top: 1.25rem;
+    /* mt-5 in tailwind */
+    transform: translateX(-50%);
+    /* -translate-x-1/2 in tailwind */
+    padding: 0.5rem;
+    /* px-2 in tailwind */
+    width: 100vw;
+    /* w-screen in tailwind */
+    max-width: 28rem;
+    /* max-w-md in tailwind */
+}
+
+.custom-dropdown .dropdown-content {
+    display: grid;
+    gap: 1.5rem;
+    /* gap-6 in tailwind */
+    background-color: #ffffff;
+    /* bg-white in tailwind */
+    padding: 1rem;
+    /* px-5 py-6 in tailwind */
+}
+
+.relative-click {
+    position: relative;
+}
+
+.custom-dropdown .dropdown-content .sublink {
+    margin: -0.75rem;
+    /* -m-3 in tailwind */
+    padding: 0.75rem;
+    /* p-3 in tailwind */
+    display: flex;
+    align-items: center;
+    border-radius: 0.375rem;
+    /* rounded-lg in tailwind */
+    transition: background-color 0.3s ease;
+    /* hover:bg-gray-100 in tailwind */
+}
+
+.custom-dropdown .dropdown-content .sublink:hover {
+    background-color: #f3f4f6;
+    /* hover:bg-gray-100 in tailwind */
+}
+
+.custom-dropdown .dropdown-content .sublink .ml-4 {
+    margin-left: 1rem;
+    /* ml-4 in tailwind */
+}
+
+.custom-dropdown .dropdown-content .sublink .text-gray-900 {
+    color: #1f2937;
+    /* text-gray-900 in tailwind */
+    font-size: 1rem;
+    /* text-base in tailwind */
+    font-weight: 500;
+    /* font-medium in tailwind */
 }
