@@ -12,21 +12,33 @@
             <h3 class="feature-title">WOMEN</h3>
             <p class="feature-paragraph">115 PRODUCTS</p>
           </div>
-          <img src="{{ "img-1.png" | asset_url }}" width="390" height="431" loading="lazy" alt="Image one">
+          {% if section.settings.image_1 != blank %}
+            <img src="{{ section.settings.image_1 |  image_url }}" width="300" height="370" alt="Image one" >
+          {% else %}
+          <img src="{{ "img-1.png" | asset_url }}" width="300" height="370" loading="lazy" alt="Image one">  
+          {% endif %}
         </div>
         <div class="feature-img">
           <div class="img-text">
             <h3 class="feature-title">MEN</h3>
             <p class="feature-paragraph">115 PRODUCTS</p>
           </div>
-          <img src="{{ "img-2.png" | asset_url }}" width="390" height="431" loading="lazy" alt="Image two">
+          {% if section.settings.image_1 != blank %}
+            <img src="{{ section.settings.image_2 |  image_url }}" width="300" height="370" alt="Image one" >
+          {% else %}
+          <img src="{{ "img-2.png" | asset_url }}" width="300" height="370" loading="lazy" alt="Image two">
+          {% endif %}
         </div>
         <div class="feature-img">
           <div class="img-text">
             <h3 class="feature-title">KIDS</h3>
             <p class="feature-paragraph">115 PRODUCTS</p>
           </div>
-          <img src="{{ "img-3.png" | asset_url }}" width="390" height="431" loading="lazy" alt="Image three">
+          {% if section.settings.image_1 != blank %}
+            <img src="{{ section.settings.image_3 |  image_url }}" width="300" height="370" alt="Image one" >
+          {% else %}
+          <img src="{{ "img-3.png" | asset_url }}" width="300" height="370" loading="lazy" alt="Image three">
+          {% endif %}
         </div>
       </div>
     </div>
@@ -48,8 +60,13 @@
             <div class="load-more-spinner"></div>
           </div>
         {% endif %}
+       
       {% endpaginate %}
+      
     </div>
+    <div class="load-btn">
+        <button>Load More</button>
+      </div>
   </div>
 </div>
 
@@ -95,6 +112,8 @@
   justify-content: center;
   padding: 5px;
   align-items: flex-start; /* Align items at the start */
+  max-width: 60%;
+  margin: auto;
 }
 
 .feature-img {
@@ -157,6 +176,26 @@
   width: 85%;
   display: flex;
   align-items: start;
+}
+
+.load-btn {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    margin-top: 20px; /* Adjust margin top as needed */
+}
+
+.load-btn button {
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color:#989898;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.load-btn button:hover {
+    background-color: gray;
 }
 
 @media (min-width: 768px) {

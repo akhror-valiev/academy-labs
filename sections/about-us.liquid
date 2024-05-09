@@ -1,0 +1,218 @@
+<div class="about-us-container">
+    <div class="about-us-trapezoid"></div>
+    <div class="about-us-wrapper">
+        <section class="image-section">
+            {% if section.settings.two_section != blank %}
+                <img src="{{ section.settings.two_section | image_url }}" width="540" height="350" loading="lazy" alt="Header Logo">
+              {% else %}
+                <img src="{{ "two-section.jpeg" | asset_url }}" width="540" height="350" loading="lazy" alt="Header Logo" >
+              {% endif %}
+        </section>
+    
+        <!-- Article Text Section -->
+        <section class="article-text-section">
+            <h2>{{ section.settings.title }}</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio nam voluptatum quaerat molestias unde atque, porro reiciendis ullam quos, magni odit sit eligendi maxime consequatur aspernatur? Tempore, ea cum. Sapiente.</p>
+        </section>
+    </div>
+
+    <!-- People Review Section -->
+    <section class="people-review-section">
+        <h2>What People Say About Us</h2>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="review-card">
+                        <div class="swiper-button-prev"></div> <!-- Prev Arrow Inside Card -->
+                        <div class="test-statement">
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta perspiciatistem. Eos cumque aliquam libero dicta, incidunt magni fugiat?</p>
+                            <h2>John Doe</h2>
+                        </div>
+                        <div class="swiper-button-next"></div> <!-- Next Arrow Inside Card -->
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="review-card">
+                        <div class="swiper-button-prev"></div> <!-- Prev Arrow Inside Card -->
+                        <div>
+                            <p class="test-statement">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem eaque, totam consectetur modi, quidem voluptate non nobis atque neque, obcaecati similique suscipit.</p>
+                            <h2>John Doe</h2>
+                        </div>
+                        <div class="swiper-button-next"></div> <!-- Next Arrow Inside Card -->
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="review-card">
+                        <div class="swiper-button-prev"></div> <!-- Prev Arrow Inside Card -->
+                        <div class="test-statement">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis ipsa sed, fuga inventore delectus laboriosam. Tempora, possimus, architecto nisi eum quia dolorem animi</p>
+                            <h2>John Doe</h2>
+                        </div>
+                        <div class="swiper-button-next"></div> <!-- Next Arrow Inside Card -->
+                    </div>
+                </div>
+                <!-- Add more review cards as needed -->
+            </div>
+            <!-- Swiper Pagination Dots -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+</div>
+
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // Initialize Swiper
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+
+<style>
+    .about-us-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .about-us-trapezoid {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 160%;
+        height: 100%;
+        background-color: #000000;
+        clip-path: polygon(0 100%, 100% 100%, 100% 0%, 0 80%);
+        z-index: -1;
+        overflow: hidden;
+}
+        .image-section img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .about-us-wrapper{
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns with equal width */
+            align-items: center;
+            position: relative; /* Ensure content is positioned relative to feature-container */
+            z-index: 1; /* Ensure content appears above the trapezoid */
+            max-width: 60%;
+            margin: auto;
+        }
+
+        /* Article Text Section */
+        .article-text-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .article-text-section h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .article-text-section p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* People Review Section */
+        .people-review-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .swiper-container {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            overflow: hidden;
+        }
+
+        .swiper-slide {
+            text-align: center;
+        }
+
+        .review-card {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            max-width: 50%;
+            position: relative; /* Add position relative */
+        }
+
+        /* Swiper Navigation Arrows */
+        .swiper-button-prev,
+        .swiper-button-next {
+            position: absolute; /* Change to absolute */
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            margin-top: -15px;
+            background-color: rgb(255, 255, 255);
+            color: gray;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 12px;
+        }
+
+        .swiper-button-prev {
+            left: 10px;
+        }
+
+        .swiper-button-next {
+            right: 10px;
+        }
+
+        /* Swiper Pagination Dots */
+        .swiper-pagination {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            opacity: 0.5;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+            background-color: red;
+        }
+        .test-statement {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            padding: 0 60px;
+        }
+        .test-statement p {
+            color: gray;
+        }
+        .test-statement h2 {
+            color: red;
+        }
+    </style>
