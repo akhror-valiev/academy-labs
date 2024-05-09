@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ product.title }}</title>
-  <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
-</head>
-<body>
+
   <div class="product-page">
     <div class="product-images">
       {% for image in product.images %}
@@ -42,17 +34,11 @@
       </div>
     </div>
   </div>
-</body>
-</html>
 
 
 
 <style>
-  body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
+
 
 .product-page {
   display: flex;
