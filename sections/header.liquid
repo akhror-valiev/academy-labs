@@ -10,22 +10,14 @@
       {% endif %}
       </a>
     </div>
-    <nav x-data="{ open: false }" class="main-nav">
+    <nav class="main-nav">
         {% for link in main_menu_linklist %}
             {% if link.links != blank %}
                 <ul class="relative-click">
-                    <li x-on:click="open = !open" class="inline-flex">
+                    <li class="inline-flex">
                       <a href="{{ link.url }}">{{ link.title }}</a>
                        {% render 'icon-chevron-down' %}
                     </li>
-                    <div x-show="open" @click.away="open = false" class="custom-dropdown">
-                      <div class="shadow-lg border ring-black ring-opacity-5 overflow-hidden rounded-lg">
-                       <div class="dropdown-content">
-                           <!-- CREATE THE SUBLINK -->
-                           <a class="sublink">Sublink 1</a>
-                       </div>
-                    </div>
-                  </div>
                 </ul>
             {% else %}
                 <ul>
