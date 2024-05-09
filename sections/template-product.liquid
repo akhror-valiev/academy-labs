@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ product.title }}</title>
+  <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}">
+</head>
+<body>
+  <div class="product-page">
+    <div class="product-images">
+      {% for image in product.images %}
+        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
+        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
+        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
+        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
+        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
+        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
+      {% endfor %}
+    </div>
+    <div class="product-details">
+      <h1>{{ product.title }}</h1>
+      <p class="price">{{ product.price | money }}</p>
+      <div class="sizes">
+        <label for="size">Select Size:</label>
+        <select id="size">
+          {% for variant in product.variants %}
+            <option value="{{ variant.id }}">{{ variant.title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="buttons">
+        <button class="add-to-cart">Add to Cart</button>
+        <button class="add-to-wishlist">Add to Wishlist</button>
+      </div>
+      <div class="description">
+        <h2>Description:</h2>
+        <p>Select the dropdown below to view more details about the {{ product.title }}.</p>
+        <div class="dropdown">
+          <!-- Dropdown content goes here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+
+
+<style>
+  body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.product-page {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+}
+
+.product-images img {
+  width: 300px;
+  height: auto;
+}
+
+.product-details {
+  max-width: 400px;
+}
+
+.price {
+  font-size: 24px;
+  color: #333;
+}
+
+.sizes {
+  margin-top: 10px;
+}
+
+.sizes label {
+  font-size: 16px;
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.add-to-cart,
+.add-to-wishlist {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.add-to-cart:hover,
+.add-to-wishlist:hover {
+  background-color: #0056b3;
+}
+
+.description {
+  margin-top: 20px;
+}
+
+.description h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.dropdown {
+  display: none;
+}
+
+.dropdown p {
+  font-size: 16px;
+}
+
+</style>

@@ -1,7 +1,7 @@
 <div class="product-card">
     {% if product.featured_image %}
         <div class="product-image-container">
-            <img src="{{ product.featured_image.src | img_url: 'medium' }}" alt="{{ product.title }}" class="product-image-modal-trigger">
+            <img src="{{ product.featured_image.src | img_url: 'medium' }}" alt="{{ product.title }}" class="product-image-modal-trigger" width="200px" height="200px">
         </div>
     {% else %}
         {{ 'product-1' |  placeholder_svg_tag }}
