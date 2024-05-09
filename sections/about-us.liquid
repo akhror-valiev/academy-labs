@@ -2,8 +2,8 @@
     <div class="about-us-trapezoid"></div>
     <div class="about-us-wrapper">
         <section class="image-section">
-            {% if section.settings.two_section != blank %}
-                <img src="{{ section.settings.two_section | image_url }}" width="540" height="350" loading="lazy" alt="Header Logo">
+            {% if section.settings.about_us_image != blank %}
+                <img src="{{ section.settings.about_us_image | image_url }}" width="540" height="350" loading="lazy" alt="Header Logo">
               {% else %}
                 <img src="{{ "two-section.jpeg" | asset_url }}" width="540" height="350" loading="lazy" alt="Header Logo" >
               {% endif %}
@@ -11,8 +11,8 @@
     
         <!-- Article Text Section -->
         <section class="article-text-section">
-            <h2>{{ section.settings.title }}</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio nam voluptatum quaerat molestias unde atque, porro reiciendis ullam quos, magni odit sit eligendi maxime consequatur aspernatur? Tempore, ea cum. Sapiente.</p>
+            <h2>{{ section.settings.about_us_title }}</h2>
+            <p>{{ section.settings.about_us_paragraph }}</p>
         </section>
     </div>
 
@@ -75,6 +75,32 @@
             },
         });
     </script>
+
+    {% schema %}
+    {
+  "name": "About Us Section Settings",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "about_us_image",
+      "label": "About Us Image",
+      "info": "Change photo"
+    },
+    {
+      "type": "text",
+      "id": "about_us_title",
+      "label": "About Us Title",
+      "default": "About Us"
+    },
+    {
+      "type": "textarea",
+      "id": "about_us_paragraph",
+      "label": "About Us Paragraph",
+      "default": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio nam voluptatum quaerat molestias unde atque, porro reiciendis ullam quos, magni odit sit eligendi maxime consequatur aspernatur? Tempore, ea cum. Sapiente."
+    }
+  ]
+}
+    {% endschema %}
 
 <style>
     .about-us-container {
