@@ -1,15 +1,32 @@
 {
-    "sections": {
-        "hero-image": {
-            "type": "hero-image"
-        },
-        "featured-collection": {
-            "type": "featured-collection",
-            "settings": {
-                "featured_collection": "all"
-            }
-        }
-
+  "sections": {
+    "hero-image": {
+      "type": "hero-image",
+      "settings": {
+        "background": "#ffffff",
+        "text_color": "#FFFFFF",
+        "title_text": "",
+        "paragrph_text": "",
+        "read_more_button": ""
+      }
     },
-    "order": ["hero-image", "featured-collection"]
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "section_title": "SHOP BY CATEGORY",
+        "featured_collection": "all",
+        "section_subtitle": "Pick a category",
+        "image_1_title": "WOMEN",
+        "image_1_products": "115 PRODUCTS",
+        "image_2_title": "MEN",
+        "image_2_products": "90 PRODUCTS",
+        "image_3_title": "KIDS",
+        "image_3_products": "75 PRODUCTS"
+      }
+    }
+  },
+  "order": [
+    "hero-image",
+    "featured-collection"
+  ]
 }
