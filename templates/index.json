@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "sections": {
         "hero-image": {
             "type": "hero-image",
@@ -47,60 +46,3 @@
         "newsletter"
     ]
 }
-=======
-  "sections": {
-    "hero-image": {
-      "type": "hero-image",
-      "settings": {
-        "background": "#ffffff",
-        "text_color": "#ffffff",
-        "title_text": "",
-        "paragrph_text": "",
-        "read_more_button": ""
-      }
-    },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "section_title": "SHOP BY CATEGORY",
-        "featured_collection": "all",
-        "section_subtitle": "Pick a category",
-        "image_1_title": "WOMEN",
-        "image_1_products": "115 PRODUCTS",
-        "image_2_title": "MEN",
-        "image_2_products": "90 PRODUCTS",
-        "image_3_title": "KIDS",
-        "image_3_products": "75 PRODUCTS"
-      }
-    },
-    "about-us": {
-      "type": "about-us",
-      "settings": {
-        "about_us_title": "ABOUT MIRALOU",
-        "about_us_paragraph": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio nam voluptatum quaerat molestias unde atque, porro reiciendis ullam quos, magni odit sit eligendi maxime consequatur aspernatur? Tempore, ea cum. Sapiente."
-      }
-    },
-    "latest-news": {
-      "type": "latest-news",
-      "settings": {
-        "news_textarea": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio eaque ipsum, eligendi repudiandae reprehenderit eos facere totam iusto accusamus asper",
-        "news_story1": "Quis egestas consecteturuu",
-        "news_story2": "Quis egestas consectetur",
-        "news_story3": "Quis egestas consectetur"
-      }
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-      }
-    }
-  },
-  "order": [
-    "hero-image",
-    "featured-collection",
-    "about-us",
-    "latest-news",
-    "newsletter"
-  ]
-}
->>>>>>> a100838ef7312e318a9a1724d2911c14ee91f565

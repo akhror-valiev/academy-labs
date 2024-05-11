@@ -7,11 +7,9 @@
 .caption-container img {
     display: block;
     width: 960px;
-    /* Set width specifically */
     height: auto;
-    /* Maintain aspect ratio */
     object-fit: cover;
-    /* Ensure the image covers the container */
+    margin-bottom: 50px;
 }
 
 .caption-container button {

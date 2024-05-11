@@ -1,11 +1,54 @@
 {{ 'newsletter.css' | asset_url | stylesheet_tag }}
 <div class="newsletter-container">
     <div class="newsletter-text"> 
-        <h2>OUR NEWSLETTER</h2>
-        <p>Stay up-to-date with our latest news and promotions!</p>
+        <h2>{{ section.settings.newsletter_title }}</h2>
+        <p>{{ section.settings.newsletter_paragraph }}</p>
     </div>
-  <form action="/subscribe" method="post">
+    {% form 'customer' %}
+        {{ form.errors | default_errors }}
+        {% if form.posted_successfully? %}
+          <p>{{ 'newsletter.confirmation' | t }}</p>
+        {% else %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input type="email"
+            name="contact[email]"
+            id="Email"
+            value="{% if customer.email != blank %}{{ customer.email }}{% endif %}"
+            placeholder="{{ 'newsletter.label' | t }}"
+            autocorrect="off"
+            autocapitalize="off">
+          <button type="submit" name="commit" id="Subscribe">
+            <span>{{ 'newsletter.button_label' | t }}</span>
+          </button>
+        {% endif %}
+      {% endform %}
+  {% comment %} <form action="/subscribe" method="post">
     <input type="email" name="email" placeholder="Your email address" required>
-    <button type="submit">Subscribe</button>
-  </form>
+    <button type="submit">{{ section.settings.button_label }}</button>
+  </form> {% endcomment %}
 </div>
+
+{% schema %}
+{
+    "name": "Newsletter",
+    "settings": [
+        {
+            "type":"text",
+            "id":"newsletter_title",
+            "label":"Newsletter Title",
+            "default":"OUR NEWSLETTER"
+        },
+        {
+            "type":"richtext",
+            "id":"newsletter_paragraph",
+            "label":"Newsletter Paragraph"
+        },
+        {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button Label",
+            "default": "Click Me"
+    }
+        ]
+}
+{% endschema %}
