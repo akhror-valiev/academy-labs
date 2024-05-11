@@ -1,39 +1,63 @@
-<!-- assets/css-vars.liquid -->
+
+
+{% assign primaryFont = 'Barlow, sans-serif' %}
+{% assign secondaryFont = 'Poppins, sans-serif' %}
+
+
+{% assign h1FontSize = '64px' %}
+{% assign h2FontSize = '50px' %}
+{% assign h3FontSize = '34px' %}
+{% assign h4FontSize = '30px' %}
+{% assign h5FontSize = '20px' %}
+{% assign h6FontSize = '14px' %}
+{% assign p1FontSize = '24px' %}
+{% assign p2FontSize = '16px' %}
+{% assign p3FontSize = '15px' %}
+{% assign p4FontSize = '14px' %}
+{% assign b1FontSize = '14px' %}
+{% assign p5FontSize = '12px' %}
+
+
+
+{% assign blackColor = '#000000' %}
+{% assign darkGrayColor = '#626262' %}
+{% assign redColor = '#ef3636' %}
+{% assign lightGrayColor = '#f6f6f6' %}
+{% assign whiteColor = '#ffffff' %}
+{% assign grayColor = '#989898' %}
+{% assign yellowColor = '#F3C449' %}
+{% assign greenColor = '#339900' %}
+{% assign darkColor = '#252525' %}
 
 <style>
-  /* Define CSS variables for color scheme */
   :root {
-    {% case section.settings.active_color_scheme %}
-      {% when 'scheme-1' %}
-        --primary-color: #FF5733;
-        --secondary-color: #3498db;
-        --accent-color: #f39c12;
-      {% when 'scheme-2' %}
-        --primary-color: #27ae60;
-        --secondary-color: #9b59b6;
-        --accent-color: #e74c3c;
-      {% when 'scheme-3' %}
-        --primary-color: #34495e;
-        --secondary-color: #f1c40f;
-        --accent-color: #2c3e50;
-    {% endcase %}
-  }
+    /* Font Variables */
+    --primary-font: '{{ primaryFont }}';
+    --secondary-font: '{{ secondaryFont }}';
 
-  /* Define CSS variables for typography */
-  :root {
-    {% case section.settings.heading_font %}
-      {% when 'Barlow' %}
-        --heading-font-family: 'Barlow', sans-serif;
-        --heading-font-weight: bold;
-      {% when 'Poppins' %}
-        --heading-font-family: 'Poppins', sans-serif;
-        --heading-font-weight: 600; /* SemiBold */
-    {% endcase %}
+    /* Text Style Variables */
+    --h1-font-size: {{ h1FontSize }};
+    --h2-font-size: {{ h2FontSize }};
+    --h3-font-size: {{ h3FontSize }};
+    --h4-font-size: {{ h4FontSize }};
+    --h5-font-size: {{ h5FontSize }};
+    --h6-font-size: {{ h6FontSize }};
+    --p1-font-size: {{ p1FontSize }};
+    --p2-font-size: {{ p2FontSize }};
+    --p3-font-size: {{ p3FontSize }};
+    --p4-font-size: {{ p4FontSize }};
+    --b1-font-size: {{ b1FontSize }};
+    --p5-font-size: {{ p5FontSize }};
 
-    {% case section.settings.body_font %}
-      {% when 'Poppins' %}
-        --body-font-family: 'Poppins', sans-serif;
-        --body-font-weight: normal;
-    {% endcase %}
+    /* Color Variables */
+    --black-color: {{ blackColor }};
+    --dark-gray-color: {{ darkGrayColor }};
+    --red-color: {{ redColor }};
+    --light-gray-color: {{ lightGrayColor }};
+    --white-color: {{ whiteColor }};
+    --gray-color: {{ grayColor }};
+    --yellow-color: {{ yellowColor }};
+    --green-color: {{ greenColor }};
+    --dark-color: {{ darkColor }};
   }
 </style>

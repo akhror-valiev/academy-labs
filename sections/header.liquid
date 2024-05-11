@@ -1,3 +1,4 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
 {% assign main_menu_linklist = linklists[section.settings.menu].links %}
 <header class="header">
   <div class="container">
@@ -41,17 +42,6 @@
 </header>
 
 
-
-
-<style>
-  .header {
-    background: {{ section.settings.background }}
-    ;
-    color: {{ section.settings.chevron_color }}
-    ;
-  }
-</style>
-
 {% schema %}
 {
     "name": "Header",
@@ -62,18 +52,6 @@
             "label": "Header logo",
             "info": "Change header logo supported png"
         },
-        {
-      "type": "color",
-      "id": "background",
-      "label": "Background",
-      "default": "#F4F4F4"
-    },
-    {
-      "type": "color",
-      "id": "chevron_color",
-      "label": "Chevron color",
-      "default": "#000000"
-    },
         {
             "type": "link_list",
             "id": "menu",

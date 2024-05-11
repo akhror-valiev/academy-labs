@@ -26,11 +26,19 @@
         },
         "about-us": {
             "type": "about-us"
+        },
+        "latest-news": {
+            "type": "latest-news"
+        },
+        "newsletter": {
+            "type": "newsletter"
         }
     },
     "order": [
         "hero-image",
         "featured-collection",
-        "about-us"
+        "about-us",
+        "latest-news",
+        "newsletter"
     ]
 }

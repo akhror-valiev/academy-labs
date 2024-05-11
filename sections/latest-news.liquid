@@ -1,0 +1,97 @@
+{{ 'latest-news.css' | asset_url | stylesheet_tag }}
+<div class="news-container">
+  <div class="news-content">
+    <h1>LATEST NEWS</h1>
+    <p class="news-p">{{ section.settings.news_textarea }}</p>
+    <div class="news-image-container">
+      <div class="news-image">
+        {% if section.settings.news_image1 != blank %}
+          <img src="{{ section.settings.news_image1 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
+        {% else %}
+          <img src="{{ "one.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy" >
+        {% endif %}
+        <div class="news-image-info">
+          <p>19.10.2024</p>
+          <h4>{{ section.settings.news_story1 }}</h4>
+          <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
+        </div>
+      </div>
+      <div class="news-image">
+        {% if section.settings.news_image2 != blank %}
+          <img src="{{ section.settings.news_image2 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
+        {% else %}
+          <img src="{{ "two.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy" >
+        {% endif %}
+        <div class="news-image-info">
+          <p>10.10.2024</p>
+          <h4>{{ section.settings.news_story2 }}</h4>
+          <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
+        </div>
+      </div>
+      <div class="news-image">
+        {% if section.settings.news_image3 != blank %}
+          <img src="{{ section.settings.news_image3 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
+        {% else %}
+          <img src="{{ "three.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy" >
+        {% endif %}
+        <div class="news-image-info">
+          <p>21.10.2024</p>
+          <h4>{{ section.settings.news_story3 }}</h4>
+          <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% render 'caption' %}
+</div>
+
+{% schema %}
+{
+  "name": "Latest News Content",
+  "settings": [
+    {
+      "type": "textarea",
+      "id":"news_textarea",
+      "label": "Textarea",
+      "default": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio eaque ipsum, eligendi repudiandae reprehenderit eos facere totam iusto accusamus asper"
+    },
+    {
+      "type": "image_picker",
+      "id":"news_image1",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id":"news_image2",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id":"news_image3",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id":"news_story1",
+      "label": "News Title",
+      "default":"Quis egestas consectetur"
+    },
+    {
+      "type": "text",
+      "id":"news_story2",
+      "label": "News Title",
+      "default":"Quis egestas consectetur"
+    },
+    {
+      "type": "text",
+      "id":"news_story3",
+      "label": "News Title",
+      "default":"Quis egestas consectetur"
+    }
+    ]
+}
+{% endschema %}
+
+
+
+
