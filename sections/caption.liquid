@@ -1,0 +1,33 @@
+{{ 'caption.css' | asset_url | stylesheet_tag }}
+<div class="caption-container">
+        <img src="{{ "Caption.PNG" | asset_url }}" width="100%" height="auto" loading="lazy" alt="Header Logo" >
+
+    <button class="caption-button"><a href="">@MIRALOU</a>{% render 'icon-instagram' %}
+    </button>
+</div>
+
+{% schema %}
+{
+  "name": "Caption Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "caption_image",
+      "label": "Caption Image"
+    },
+    {
+      "type": "text",
+      "id": "instagram_handle",
+      "label": "Instagram Handle",
+      "default": "@MIRALOU"
+    },
+    {
+      "type": "url",
+      "id": "instagram_link",
+      "label": "Instagram Link",
+      "default": "/collections"
+    }
+  ]
+}
+
+{% endschema %}
