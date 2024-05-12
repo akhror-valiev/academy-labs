@@ -87,9 +87,10 @@
 }
 
 .footer-divider {
-    width: 90%;
+    max-width: 960px;
     border: 1px solid #cf1818;
     margin: 10px 0;
+    width: -webkit-fill-available;
 }
 
 .footer-text {

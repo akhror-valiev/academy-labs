@@ -1,0 +1,74 @@
+<div class="loader fixed grid place-content-center inset-0 bg-black/20 z-10" x-show="loading">
+    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" width="24" height="24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+</div>
+
+<style>
+   .loader {
+    position: fixed;
+    display: grid;
+    place-content: center;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+.loader circle {
+    stroke-dasharray: 80;
+    stroke-dashoffset: 60;
+    animation: dash 1.5s ease-in-out infinite, color-change 3s ease-in-out infinite;
+}
+
+.loader path {
+    fill: transparent;
+    animation: color-change 3s ease-in-out infinite;
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 60;
+    }
+    50% {
+        stroke-dashoffset: 20;
+    }
+    100% {
+        stroke-dashoffset: 60;
+    }
+}
+
+@keyframes color-change {
+    0% {
+        stroke: #333; 
+        fill: transparent; 
+    }
+    50% {
+        stroke: #ada6a6; 
+        fill: transparent; 
+    }
+    100% {
+        stroke: #d8d3d3; 
+        fill: transparent; 
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader svg {
+    animation: spin 2s linear infinite;
+    margin-left: -1px;
+    margin-right: 3px;
+    height: 20px;
+    width: 20px;
+}
+
+
+</style>
