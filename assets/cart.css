@@ -1,0 +1,152 @@
+/* General Styles */
+.text-3xl {
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
+  }
+  
+  .text-blue-600 {
+    color: #2563EB;
+  }
+  
+  .text-blue-600:hover {
+    color: #3B82F6;
+  }
+  
+  .text-blue-800 {
+    color: #0D2B69;
+  }
+  
+  .font-medium {
+    font-weight: 500;
+  }
+  
+  .underline {
+    text-decoration: underline;
+  }
+  
+  .text-left {
+    text-align: left;
+  }
+  
+  .text-sm {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
+  }
+  
+  .text-gray-500 {
+    color: #6B7280;
+  }
+  
+  .font-medium {
+    font-weight: 500;
+  }
+  
+  .text-red-500 {
+    color: #EF4444;
+  }
+  
+  .table-auto {
+    width: auto;
+  }
+  
+  .divide-y > :not(template) ~ :not(template) {
+    --tw-divide-y-reverse: 0;
+    border-width: 0 0 1px;
+  }
+  
+  .divide-gray-200 > :not(template) ~ :not(template) {
+    --tw-divide-opacity: 1;
+    border-color: rgba(229, 231, 235, var(--tw-divide-opacity));
+  }
+  
+  .table-row {
+    display: table-row;
+  }
+  
+  .py-4 {
+    padding-top: 1rem; /* 16px */
+    padding-bottom: 1rem; /* 16px */
+  }
+  
+  .px-2 {
+    padding-left: 0.5rem; /* 8px */
+    padding-right: 0.5rem; /* 8px */
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .justify-between {
+    justify-content: space-between;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .my-1 {
+    margin-top: 0.25rem; /* 4px */
+    margin-bottom: 0.25rem; /* 4px */
+  }
+  
+  .my-2 {
+    margin-top: 0.5rem; /* 8px */
+    margin-bottom: 0.5rem; /* 8px */
+  }
+  
+  .w-20 {
+    width: 5rem; /* 80px */
+  }
+  
+  .h-20 {
+    height: 5rem; /* 80px */
+  }
+  
+  .object-cover {
+    object-fit: cover;
+  }
+  
+  .border {
+    border-width: 1px;
+  }
+  
+  .w-full {
+    width: 100%;
+  }
+  
+  .resize-none {
+    resize: none;
+  }
+  
+  .h-20 {
+    height: 5rem; /* 80px */
+  }
+  
+  .border-gray-600 {
+    border-color: #4B5563;
+  }
+  
+  .border-gray-600 {
+    --tw-border-opacity: 1;
+    border-color: rgba(75, 85, 99, var(--tw-border-opacity));
+  }
+  
+  
+  .border-gray-600 {
+    --tw-border-opacity: 1;
+    border-color: rgba(75, 85, 99, var(--tw-border-opacity));
+  }
+  
+  .border {
+    text-decoration: none;
+  }
+  .text-gray-600 {
+    color: #4B5563;
+  }
+  
+  /* Cart Empty Message Styles */
+  .text-center {
+    text-align: center;
+  }
+  
