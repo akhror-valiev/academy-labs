@@ -5,9 +5,17 @@
     padding: 20px;
 }
 
+.product-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px;
+    
+}
+
 .product-images img {
-    width: 300px;
-    height: auto;
+    width: 200px;
+    height: 180px;
+    object-fit: cover;
 }
 
 .product-details {
@@ -36,15 +44,15 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
+    border: 2px solid red; /* Changed border style */
+    background-color: #fff; /* Changed background color */
+    color: #000; /* Changed text color */
     border-radius: 5px;
 }
 
 .add-to-cart:hover,
 .add-to-wishlist:hover {
-    background-color: #0056b3;
+    background-color: #f71111;
 }
 
 .description {
@@ -55,6 +63,50 @@
     font-size: 20px;
     margin-bottom: 10px;
 }
+/* Product Variant Selectors */
+.product-details .sizes select,
+.product-details input[type="number"] {
+    width: calc(100% - 20px); /* Adjust width for icon */
+    padding: 8px 30px 8px 8px; /* Adjust padding for icon */
+    border: 1px solid red;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+/* Product Variant Selectors Dropdown Arrow */
+.product-details .sizes select {
+    background-image: url('path_to_chevron_icon_down'); /* Replace 'path_to_chevron_icon_down' with your chevron-down icon */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px; /* Adjust size as needed */
+}
+
+/* Quantity Input Spinner Arrows */
+.product-details input[type="number"]::-webkit-inner-spin-button,
+.product-details input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.product-details input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Product Variant Selectors on Focus */
+.product-details .sizes select:focus,
+.product-details input[type="number"]:focus {
+    border-color: red;
+    outline: none;
+}
+
+/* Product Variant Selectors Dropdown Arrow */
+.product-details .sizes select {
+    appearance: none; /* Remove default arrow */
+    -webkit-appearance: none; /* Safari and Chrome */
+    -moz-appearance: none; /* Firefox */
+}
+
 
 .dropdown {
     display: none;
