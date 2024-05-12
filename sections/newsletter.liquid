@@ -7,7 +7,7 @@
     {% form 'customer' %}
         {{ form.errors | default_errors }}
         {% if form.posted_successfully? %}
-          <p>{{ 'newsletter.confirmation' | t }}</p>
+          <p class="newsletter-confirm-p">{{ 'newsletter.confirmation' | t }}</p>
         {% else %}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <input type="email"

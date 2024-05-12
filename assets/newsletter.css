@@ -13,8 +13,14 @@
     max-width: 22%;
 }
 
+.newsletter-confirm-p {
+    color: #fff;
+    font-weight: 600;
+}
+
 .newsletter-text h2 {
     color: red;
+    text-align: left;
 }
 
 .newsletter-text p {
