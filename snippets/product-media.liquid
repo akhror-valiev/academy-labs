@@ -1,0 +1,13 @@
+{% case media.media_type %}
+    {% when 'image' %}
+        <img class="media-img" src="{{ media | img_url: 'large' }}" alt="{{ media.preview_image.alt }}">
+    {% else %}
+{% endcase %}
+
+
+<style>
+     .media-img{
+    width: 300px;
+    height: 300px;
+}
+</style>

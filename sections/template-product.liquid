@@ -1,39 +1,112 @@
 {{ 'template-product.css' | asset_url | stylesheet_tag }}
+{% assign selected_variant = product.selected_or_first_available_variant %}
   <div class="product-page">
     <div class="product-images">
-      {% for image in product.images %}
-        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
-        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
-        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
-        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
-        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
-        <img src="{{ image.src | img_url: 'medium' }}" alt="{{ product.title }}">
+      {% for media in product.media %}
+        {% render 'product-media', media:media %}
       {% endfor %}
     </div>
-    <div class="product-details">
+    {% form 'product', product %}
+      <input type="hidden" name="id" value="{{ selected_variant.id }}">
+      <div class="product-details">
       <h1>{{ product.title }}</h1>
-      <p class="price">{{ product.price | money }}</p>
+     
+      <span>{{ selected_variant.compare_at_price | money }}</span>
+      <span>{{ selected_variant.price | money }}</span>
+
+      
+      {% if selected_variant.price < selected_variant.compare_at_price %}
+        <span>SALE</span>
+      {% endif %}
+
       <div class="sizes">
-        <label for="size">Select Size:</label>
-        <select id="size">
-          {% for variant in product.variants %}
-            <option value="{{ variant.id }}">{{ variant.title }}</option>
-          {% endfor %}
-        </select>
+        <div>
+          {% unless product.has_only_default_variant %}
+            <div data-url="{{ product.url }}" data-section="{{ section.id }}">
+              {% for option in product.options_with_values %}
+                <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+                <div>
+                  <select name="options[{{ option.name | escape }}]" id="Option-{{ section.id }}-{{ forloop.index0 }}">
+                    {% for value in option.values %}
+                      <option value="{{ value | escape }}"
+                      {% if option.selected_value == value %}
+                        selected = "selected"
+                      {% endif %}
+                      >{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div>
+                <label for="Quantity-{{ section.id }}">Quantity</label>
+                <div>
+                  <input type="number" name="quantity" id="Quantity-{{ section.id }}" value="1" min="1">
+                </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endunless %}
+        </div>
       </div>
       <div class="buttons">
-        <button class="add-to-cart">Add to Cart</button>
-        <button class="add-to-wishlist">Add to Wishlist</button>
+        <button type="submit" class="add-to-cart"
+        {% if selected_variant.available == false %}
+          disabled
+        {% endif %}>
+          {% if selected_variant.available == false %}
+            Sold out
+          {% else %}
+              Add to cart
+          {% endif %}
+        </button>
+        <button type="submit" class="add-to-wishlist">Add to Wishlist</button>
       </div>
       <div class="description">
         <h2>Description:</h2>
-        <p>Select the dropdown below to view more details about the {{ product.title }}.</p>
+        <p>{{ product.description }}</p>
         <div class="dropdown">
           <!-- Dropdown content goes here -->
         </div>
       </div>
     </div>
+    {% endform %}
   </div>
 
 
 
+  {% schema %}
+  {
+    "name": "Product",
+    "blocks": [
+      {
+        "type": "title",
+        "name":"Title",
+        "limit": 1
+      },
+      {
+        "type": "price",
+        "name":"Price",
+        "limit": 1
+      },
+      {
+        "type": "variant_selector",
+        "name":"Variant Selector",
+        "limit": 1
+      },
+      {
+        "type": "quantity",
+        "name":"Quantity",
+        "limit": 1
+      },
+      {
+        "type": "description",
+        "name":"Description",
+        "limit": 1
+      },
+      {
+        "type": "checkout_buttons",
+        "name":"Checkout Buttons",
+        "limit": 1
+      }
+      ]
+  }
+  {% endschema %}
