@@ -43,6 +43,7 @@
     border: 1px solid var(--red-color);
     border-radius: 5px;
     background-color: var(--black-color);
+    color: var(--white-color);
 }
 
 .newsletter-container button {
