@@ -4,14 +4,14 @@
     <div class="trapezoid"></div>
     <div class="content">
       <div class="text-groups">
-        <h1>{{ section.settings.section_title }}</h1>
+        <h3>{{ section.settings.section_title }}</h3>
         <p>{{ section.settings.section_subtitle }}</p>
       </div>
       <div class="img-container">
         <div class="feature-img">
           <div class="img-text">
-            <h3 class="feature-title">WOMEN</h3>
-            <p class="feature-paragraph">115 PRODUCTS</p>
+            <h4 class="feature-title">WOMEN</h4>
+            <h6 class="feature-paragraph">115 PRODUCTS</h6>
           </div>
           {% if section.settings.image_1 != blank %}
             <img src="{{ section.settings.image_1 |  image_url }}" width="300" height="370" alt="Image one" >
@@ -21,8 +21,8 @@
         </div>
         <div class="feature-img">
           <div class="img-text">
-            <h3 class="feature-title">MEN</h3>
-            <p class="feature-paragraph">115 PRODUCTS</p>
+            <h4 class="feature-title">MEN</h4>
+            <h6 class="feature-paragraph">115 PRODUCTS</h6>
           </div>
           {% if section.settings.image_1 != blank %}
             <img src="{{ section.settings.image_2 |  image_url }}" width="300" height="370" alt="Image one" >
@@ -32,8 +32,8 @@
         </div>
         <div class="feature-img">
           <div class="img-text">
-            <h3 class="feature-title">KIDS</h3>
-            <p class="feature-paragraph">115 PRODUCTS</p>
+            <h4 class="feature-title">KIDS</h4>
+            <h6 class="feature-paragraph">115 PRODUCTS</h6>
           </div>
           {% if section.settings.image_1 != blank %}
             <img src="{{ section.settings.image_3 |  image_url }}" width="300" height="370" alt="Image one" >

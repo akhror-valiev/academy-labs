@@ -44,15 +44,15 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    border: 2px solid red; /* Changed border style */
-    background-color: #fff; /* Changed background color */
-    color: #000; /* Changed text color */
+    border: 1px solid var(--red-color);
+    background-color: var(--white-color);
+    color: var(--black-color);
     border-radius: 5px;
 }
 
 .add-to-cart:hover,
 .add-to-wishlist:hover {
-    background-color: #f71111;
+    background-color: var(--red-color);
 }
 
 .description {
@@ -66,9 +66,9 @@
 /* Product Variant Selectors */
 .product-details .sizes select,
 .product-details input[type="number"] {
-    width: calc(100% - 20px); /* Adjust width for icon */
-    padding: 8px 30px 8px 8px; /* Adjust padding for icon */
-    border: 1px solid red;
+    width: calc(100% - 20px); 
+    padding: 8px 30px 8px 8px; 
+    border: 1px solid var(--red-color);
     border-radius: 5px;
     margin-bottom: 10px;
     position: relative;
@@ -76,10 +76,10 @@
 
 /* Product Variant Selectors Dropdown Arrow */
 .product-details .sizes select {
-    background-image: url('path_to_chevron_icon_down'); /* Replace 'path_to_chevron_icon_down' with your chevron-down icon */
+    background-image: url('path_to_chevron_icon_down'); 
     background-repeat: no-repeat;
     background-position: right 10px center;
-    background-size: 16px; /* Adjust size as needed */
+    background-size: 16px; 
 }
 
 /* Quantity Input Spinner Arrows */
@@ -96,7 +96,7 @@
 /* Product Variant Selectors on Focus */
 .product-details .sizes select:focus,
 .product-details input[type="number"]:focus {
-    border-color: red;
+    border-color: var(--red-color);
     outline: none;
 }
 

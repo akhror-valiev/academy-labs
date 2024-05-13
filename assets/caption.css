@@ -18,8 +18,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 10px 20px;
-    background-color: white;
-    color: black;
+    background-color: var(--white-color);
+    color: var(--black-color);
     border: none;
     z-index: 1;
     display: flex;
@@ -29,5 +29,5 @@
 
 .caption-container a {
     text-decoration: none;
-    color: #333;
+    color: var(--black-color);
 }

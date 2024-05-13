@@ -1,5 +1,5 @@
 .header {
-    background-color: #ffffff;
+    background-color: var(--white-color);
     padding: 20px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -42,15 +42,16 @@
 
 .main-nav ul li a {
     text-decoration: none;
-    color: #333333;
+    color: var(--dark-black-color);
     font-weight: bold;
+    font-size: 14px;
 }
 
 
 /* Active link styling */
 
 .main-nav ul li a.active {
-    color: red;
+    color: var(--red-color);
     /* Change active link color */
 }
 
@@ -58,7 +59,7 @@
 /* Hover effect */
 
 .main-nav ul li a:hover {
-    color: #ccc;
+    color: var(--dark-gray-color);
     /* Change hover color */
 }
 

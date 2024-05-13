@@ -7,9 +7,9 @@
         {{ 'product-1' |  placeholder_svg_tag }}
     {% endif %}
     <div class="product-details">
-        <p class="brand">{{ product.vendor }}</p>
-        <p class="model">{{ product.title }}</p>
-        <p class="price">{{ product.price | money }}</p>
+        <p class="p-brand">{{ product.name }}</p>
+        <p class="p-models">{{ product.title }}</p>
+        <p class="p-price">{{ product.price | money }}</p>
         <a href="{{ product.url }}" class="view-btns">View Product</a>
     </div>
 </div>
@@ -104,5 +104,16 @@
 
 .view-button:hover {
     background-color: gray;
+}
+
+.p-brand {
+color: var(--dark-gray-color);
+}
+.p-models {
+    font-weight: bold;
+}
+
+.p-price {
+color: var(--red-color);
 }
 </style>

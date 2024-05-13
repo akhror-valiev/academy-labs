@@ -5,7 +5,7 @@
     text-align: center;
     display: flex;
     gap: 30px;
-    background-color: #2e3237;
+    background-color: var(--black-color);
     padding: 20px;
 }
 
@@ -14,24 +14,21 @@
 }
 
 .newsletter-confirm-p {
-    color: #fff;
+    color: var(--white-color);
     font-weight: 600;
 }
 
-.newsletter-text h2 {
-    color: red;
+.newsletter-text h4 {
+    color: var(--white-color);
     text-align: left;
 }
 
 .newsletter-text p {
     text-align: left;
-    color: #fff;
+    color: var(--white-color);
+    font-size: var(--p5-font-size);
 }
 
-.newsletter-container h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
 
 .newsletter-container form {
     display: flex;
@@ -43,15 +40,15 @@
 .newsletter-container input[type="email"] {
     padding: 10px;
     width: 300px;
-    border: 1px solid red;
+    border: 1px solid var(--red-color);
     border-radius: 5px;
-    background-color: #393232;
+    background-color: var(--black-color);
 }
 
 .newsletter-container button {
     padding: 10px 40px;
-    background-color: red;
-    color: #fff;
+    background-color: var(--red-color);
+    color: var(--white-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;

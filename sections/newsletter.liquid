@@ -1,7 +1,7 @@
 {{ 'newsletter.css' | asset_url | stylesheet_tag }}
 <div class="newsletter-container">
     <div class="newsletter-text"> 
-        <h2>{{ section.settings.newsletter_title }}</h2>
+        <h4>{{ section.settings.newsletter_title }}</h4>
         <p>{{ section.settings.newsletter_paragraph }}</p>
     </div>
     {% form 'customer' %}

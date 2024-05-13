@@ -9,7 +9,7 @@
     left: 0;
     width: 160%;
     height: 100%;
-    background-color: #000000;
+    background-color: var(--black-color);
     clip-path: polygon(0 0, 100% 0, 0% 90%, 0% 60%);
     z-index: -1;
     overflow: hidden;
@@ -28,12 +28,14 @@
     width: 50%;
 }
 
-.text-groups h1 {
-    color: #EF3636;
+.text-groups h3 {
+    color: var(--red-color);
+    font-size: var(--h3-font-size);
 }
 
 .text-groups p {
-    color: #989898;
+    color: var(--gray-color);
+    font-size: var(--p3-font-size);
 }
 
 .img-container {
@@ -58,18 +60,20 @@
     align-items: flex-end;
     left: calc(50% + 20px);
     padding: 20px 0;
-    color: white;
+    color: var(--white-color);
     border-radius: 5px;
     text-align: end;
 }
 
-.img-text h3 {
-    color: #EF3636;
-    ;
+.img-text h4 {
+    color: var(--red-color);
+    font-size: var(--h4-font-size);
+    
 }
 
-.img-text p {
-    color: #F6F6F6;
+.img-text h6 {
+    color: var(--white-color);
+    font-size: var(--h6-font-size);
 }
 
 .feature-title,
@@ -122,8 +126,8 @@
 .load-btn button {
     padding: 10px 20px;
     /* Adjust padding as needed */
-    background-color: #989898;
-    color: white;
+    background-color: var(--gray-color);
+    color: var(--white-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -131,7 +135,7 @@
 }
 
 .load-btn button:hover {
-    background-color: gray;
+    background-color: var(--dark-gray-color);
 }
 
 @media (min-width: 768px) {
