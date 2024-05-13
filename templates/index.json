@@ -35,6 +35,7 @@
       "type": "latest-news",
       "settings": {
         "news_textarea": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio eaque ipsum, eligendi repudiandae reprehenderit eos facere totam iusto accusamus asper",
+        "news_image1": "shopify:\/\/shop_images\/5_7e3f4d08-7010-418c-9f11-759448b6f77d.png",
         "news_story1": "Quis egestas consectetur",
         "news_story2": "Quis egestas consectetur",
         "news_story3": "Quis egestas consectetur"
@@ -52,7 +53,7 @@
       "settings": {
         "newsletter_title": "OUR NEWSLETTER",
         "newsletter_paragraph": "<p>Stay with us and stay tuned, Miralou team!<\/p>",
-        "button_label": "Click Me"
+        "button_label": "show me"
       }
     }
   },

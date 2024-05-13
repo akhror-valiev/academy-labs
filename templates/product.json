@@ -3,6 +3,11 @@
     "template": {
       "type": "template-product",
       "blocks": {
+        "variant_selector_4dg7LQ": {
+          "type": "variant_selector",
+          "settings": {
+          }
+        },
         "price_qfmkXr": {
           "type": "price",
           "settings": {
@@ -10,11 +15,6 @@
         },
         "title_4WNF9Q": {
           "type": "title",
-          "settings": {
-          }
-        },
-        "variant_selector_4dg7LQ": {
-          "type": "variant_selector",
           "settings": {
           }
         },
@@ -35,9 +35,9 @@
         }
       },
       "block_order": [
+        "variant_selector_4dg7LQ",
         "price_qfmkXr",
         "title_4WNF9Q",
-        "variant_selector_4dg7LQ",
         "quantity_UJPFGg",
         "description_mhyqem",
         "checkout_buttons_mLh9Aa"
