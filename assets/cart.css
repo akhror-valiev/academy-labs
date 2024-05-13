@@ -87,13 +87,12 @@ body {
   
   .cart-button,
   .crat-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    color: var(--red-color);
+    border: 1px solid var(--red-color);
     padding: 10px 20px;
     cursor: pointer;
     text-transform: uppercase;
-    font-weight: bold;
+    font-weight: 700;
   }
   
   .cart-variant{
@@ -101,7 +100,7 @@ body {
   }
   .cart-button:hover,
   .crat-button:hover {
-    background-color: #0056b3;
+    background-color: var(--red-color);
   }
   
   .cart-empty-container {
@@ -112,7 +111,5 @@ body {
     font-size: 1.5rem;
   }
   
-  .cart-url-p a {
-    color: blue;
-  }
+  
   
