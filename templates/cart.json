@@ -1,8 +1,34 @@
 {
-    "sections":{
-        "template":{
-            "type": "template-cart"
+  "sections": {
+    "template": {
+      "type": "template-cart",
+      "blocks": {
+        "subtotal_9imkdf": {
+          "type": "subtotal",
+          "settings": {
+          }
+        },
+        "update_button_Ud3D8E": {
+          "type": "update_button",
+          "settings": {
+          }
+        },
+        "checkout_button_xXqWCE": {
+          "type": "checkout_button",
+          "settings": {
+          }
         }
-    },
-    "order":["template"]
+      },
+      "block_order": [
+        "subtotal_9imkdf",
+        "update_button_Ud3D8E",
+        "checkout_button_xXqWCE"
+      ],
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "template"
+  ]
 }
