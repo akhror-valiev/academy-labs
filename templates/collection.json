@@ -3,7 +3,7 @@
     "template": {
       "type": "template-collection",
       "settings": {
-        "products_per_row": 4
+        "products_per_row": 8
       }
     }
   },
