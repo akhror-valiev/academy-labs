@@ -1,21 +1,24 @@
-<div class="background-image2">
-    <img src="{{ "backg2.jpeg" | asset_url }}" loading="lazy" alt="Header Image" width="100%"  height="auto"  >
+{% assign image_url = "backg2.jpeg" %}
+{% assign container_height = "230px" %}
+
+<div class="background-image" style="height: {{ container_height }};">
+    <img src="{{ image_url | asset_url }}" loading="lazy" alt="Header Image" width="100%" height="auto">
 </div>
 
 {% style %}
-    .background-image2 {
-        height: 230px; /* Set the height of the container */
-        overflow: hidden; /* Hide any overflow from the image */
-        position: relative; /* Position the container relative to its normal position */
+    .background-image {
+        overflow: hidden;
+        position: relative;
     }
 
-    .background-image2 img {
-        
-       
-        object-fit: cover; 
-        display: block; 
-        position: relative; 
-        z-index: 1; 
+    .background-image img {
+        display: block;
+        position: relative;
+        z-index: 1;
         filter: brightness(40%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
     }
 {% endstyle %}

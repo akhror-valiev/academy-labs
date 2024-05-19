@@ -1,0 +1,99 @@
+<style>
+  /* Add your CSS styles here */
+  .cart-drawer {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background-color: white;
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+  }
+
+  .cart-drawer.open {
+    transform: translateX(0);
+  }
+
+  /* Add your other styles here */
+</style>
+
+<div id="cart-drawer" class="cart-drawer">
+  <div class="p-4">
+    <h2 class="text-2xl mb-4">Your Cart</h2>
+    <div id="cart-items">
+      <!-- Cart items will be injected here by JavaScript -->
+    </div>
+    <div class="cart-subtotal">
+      <!-- Subtotal will be injected here by JavaScript -->
+    </div>
+    <div class="mt-4">
+      <a href="/checkout" class="btn btn-primary w-full text-center">Checkout</a>
+    </div>
+  </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+  const cartButton = document.querySelector('.cart-icon');
+  const cartDrawer = document.getElementById('cart-drawer');
+
+  cartButton.addEventListener('click', function () {
+    cartDrawer.classList.toggle('open');
+    if (cartDrawer.classList.contains('open')) {
+      fetchCartItems();
+    }
+  });
+
+  function fetchCartItems() {
+    fetch('/cart.js')
+      .then(response => response.json())
+      .then(data => {
+        renderCartItems(data.items);
+        renderCartSubtotal(data.total_price);
+      });
+  }
+
+  function renderCartItems(items) {
+    const cartItemsContainer = document.getElementById('cart-items');
+    cartItemsContainer.innerHTML = items.map(item => `
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.title}" class="cart-item-image">
+        <div class="cart-item-details">
+          <h3 class="cart-item-title">${item.title}</h3>
+          <p class="cart-item-quantity">${item.quantity} x ${item.price}</p>
+          <button class="cart-item-remove" onclick="removeCartItem(${item.id})">Remove</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderCartSubtotal(totalPrice) {
+    const cartSubtotalContainer = document.querySelector('.cart-subtotal');
+    cartSubtotalContainer.innerHTML = `
+      <h3 class="text-lg">Subtotal: ${Shopify.formatMoney(totalPrice)}</h3>
+    `;
+  }
+
+  window.removeCartItem = function (itemId) {
+    fetch(`/cart/change.js`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ id: itemId, quantity: 0 })
+    })
+      .then(response => response.json())
+      .then(data => {
+        renderCartItems(data.items);
+        renderCartSubtotal(data.total_price);
+      });
+  }
+});
+
+</script>

@@ -1,4 +1,99 @@
-{{ 'cart.css' | asset_url | stylesheet_tag }}
+{% include 'banner-image', image_url: 'backg3.jpeg', container_height: '230px' %}
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+{% comment %} <div class="cart-container">
+  <h1>Product</h1>
+  <div class="cart-wrapper">
+    <div class="product-detail-cart">
+      <div class="detail-first-part">
+        <img src="{{ "img-1.png" | asset_url }}" width="60" height="40" loading="lazy" alt="Header Logo" >
+        <p>product name</p>
+      </div>
+        <div class="detail-second-part">
+          <p>product quantity</p>
+          <p>product price</p>
+        </div>
+    </div>
+    <div class="cart-total">
+      <h4>CART TOTALS</h4>
+      <div class="cart-subtotal">
+        <p class="cart-subtotal-p">Subtotal:</p>
+        <span class="cart-subtotal-s">$338</span>
+      </div>
+      <div class="cart-calc">
+        <h4 class="cart-calc-total">TOTAL:</h4>
+        <span>$338</span>
+      </div>
+      <div class="cart-button-group">
+        <button>Proceed to Check</button>
+        <button>Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div> {% endcomment %}
+
+{% if cart.item_count > 0 %}
+<div class="cart-container">
+  <div class="cart-wrapper">
+    <form action="/cart" method="POST" class="cart-form" novalidate>
+      <div class="cart-product-details">
+        <div class="card-div">
+          <div class="card-body">
+            <table class="table-auto">
+              <tbody>
+                  {% for item in cart.items %}
+                      <tr class="table-row">
+                          <td class="py-4 px-2">
+                              <a href="{{ item.url }}">
+                                  {% if item.image %}
+                                      <img src="{{ item | img_url: 'small' }}" alt="{{ item.title | escape }}" class="w-20">
+                                  {% else %}
+                                      {{ 'product-1' | placeholder_svg_tag: 'w-20 h-20' }}
+                                  {% endif %}
+                              </a>
+                          </td>
+                          <td class="py-4-urls">
+                            <div class="cart-variants">
+                              <a href="{{ item.url }}" class="my-1">{{ item.product.title | truncatewords: 5}}</a>
+                              <span class="cart-variant">{{ item.variant.title }}</span>
+                              <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" class="text-sm font-medium text-red-500 my-1">remove</a>
+                            </div>
+                          </td>
+                          <td class="py-4-t">
+                              <input type="number" name="updates[]" id="updates_{{ forloop.index }}" value="{{ item.quantity }}" min="0" class="w-20 border p-2">
+                          </td>
+                          <td class="py-4-price">
+                              {{ item.line_price | money }}
+                          </td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          </div>
+        </div>
+      </div>
+      <div class="cart-product-detail">
+        <div class="card-btn-wrapper">
+          <div class="card-body">
+            <p>sub total: {{ cart.total_price | money}}</p>
+            <button type="submit" name="update">UPDATE</button>
+            <button type="submit" name="checkout">CHECKOUT</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% else %}
+  <div class="container">
+    <div class="cart-row">
+      <h2 class="text-center">YOUR CART IS EMPTY</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse quisquam quasi nam officiis suscipit quos repellendus tempora.</p>
+    </div>
+  </div>
+{% endif %}
+
+
 {% if cart.item_count > 0 %}
   <div class="p-4">
       <div class="max-w">
@@ -85,7 +180,6 @@
       </div>
   </div>
 {% endif %}
-
 {% schema %}
 {
   "name": "Template Cart",
@@ -109,3 +203,80 @@
 }
 {% endschema %}
   
+
+<style>
+  .cart-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .product-detail-cart {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .detail-first-part {
+    display: flex;
+  }
+
+  .detail-second-part {
+    display: flex;
+  }
+  
+  .cart-subtotal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 60px;
+  }
+
+ .cart-subtotal-p {
+    padding: 0;
+    margin: 10px;
+ }
+
+  .cart-calc {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #ccc;
+  
+}
+
+.cart-calc-total {
+  padding: 10px;
+}
+
+  .cart-total {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    width: 18%;
+    position: relative;
+  }
+  .cart-total h4 {
+    margin: 0;
+  
+}
+
+.cart-button-group {
+  position: absolute;
+  bottom: -45px;
+  display: flex;
+  gap: 15px;
+  left: 0;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.cart-button-group button {
+  border: 1px solid red;
+  padding: 8px 16px;
+}
+</style>
+

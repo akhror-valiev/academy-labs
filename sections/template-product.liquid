@@ -1,170 +1,198 @@
 {{ 'template-product.css' | asset_url | stylesheet_tag }}
+{{ 'featured-collection.css' | asset_url | stylesheet_tag }}
+
 {% assign selected_variant = product.selected_or_first_available_variant %}
-  <div class="product-page">
-    <div class="product-images">
-      {% for media in product.media %}
-        {% render 'product-media', media:media %}
-      {% endfor %}
-    </div>
-    {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
-      <input type="hidden" name="id" value="{{ selected_variant.id }}">
-      <div class="product-details">
+<div class="product-page">
+  <div class="product-images">
+    {% for media in product.media %}
+      {% render 'product-media', media: media %}
+    {% endfor %}
+  </div>
+  {% form 'product', product, id: 'product-form', novalidate: 'novalidate' %}
+    <input type="hidden" name="id" value="{{ selected_variant.id }}">
+    <div class="product-details">
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'title' %}
             <div>
               <h1>{{ product.title }}</h1>
             </div>
-            {% when 'price' %}
-
+          {% when 'price' %}
             <div id="price-{{ section.id }}">
               <span>{{ selected_variant.price | money }}</span>
-
               {% if selected_variant.price < selected_variant.compare_at_price %}
                 <span></span>
               {% endif %}
             </div>
-
-            {% when 'variant_selector' %}
-            
-              <div class="sizes">
-                <div>
-                  {% unless product.has_only_default_variant %}
-                    <variant-selector data-url="{{ product.url }}" data-section="{{ section.id }}">
-                      {% for option in product.options_with_values %}
-                        <label for="Option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
-                        <div>
-                          <select name="options[{{ option.name | escape }}]" id="Option-{{ section.id }}-{{ forloop.index0 }}">
-                            {% for value in option.values %}
-                              <option value="{{ value | escape }}"
-                              {% if option.selected_value == value %}
-                                selected = "selected"
-                              {% endif %}
-                              >{{ value }}</option>
-                            {% endfor %}
-                          </select>
-                        </div>
-                        <div>
-                        </div>
-                        <script type="application/json">
-                          {{ product.variants | json }}
-                        </script>
+          {% when 'variant_selector' %}
+            <div class="variants">
+              {% unless product.has_only_default_variant %}
+                <variant-selector data-url="{{ product.url }}" data-section="{{ section.id }}">
+                  {% for option in product.options_with_values %}
+                    <label>{{ option.name }}</label>
+                    <div class="variant-buttons" id="Option-{{ section.id }}-{{ forloop.index0 }}">
+                      {% for value in option.values %}
+                        <button type="button" class="variant-button" data-value="{{ value | escape }}" 
+                          {% if option.selected_value == value %}class="selected"{% endif %}>
+                          {{ value }}
+                        </button>
                       {% endfor %}
-                    </variant-selector>
-                  {% endunless %}
-                </div>
-              </div>
-
-              {% when 'quantity' %}
+                    </div>
+                    <script type="application/json">
+                      {{ product.variants | json }}
+                    </script>
+                  {% endfor %}
+                </variant-selector>
+              {% endunless %}
+            </div>
+          {% comment %} {% when 'quantity' %}
+            <div>
+              <label for="Quantity-{{ section.id }}">Quantity</label>
               <div>
-                <label for="Quantity-{{ section.id }}">Quantity</label>
-                
-                <div>
-                  
-                  <input type="number" name="quantity" id="Quantity-{{ section.id }}" value="1" min="1" >
-                </div>
+                <input type="number" name="quantity" id="Quantity-{{ section.id }}" value="1" min="1">
               </div>
-              {% when 'description' %}
-                <div class="description">
-                  <h2>Description:</h2>
-                  <p>{{ product.description }}</p>
-                </div>
-                {% when 'checkout_buttons' %}
-                  <div class="buttons">
-                    <button type="submit" class="add-to-cart"
-                    {% if selected_variant.available == false %}
-                      disabled
-                    {% endif %}>
-                      {% if selected_variant.available == false %}
-                        Sold out
-                      {% else %}
-                          Add to cart
-                      {% endif %}
-                    </button>
-                    <button type="submit" class="add-to-wishlist">Add to Wishlist</button>
-                  </div>
-            
+            </div> {% endcomment %}
+          {% when 'description' %}
+            <div class="description">
+              <h2>Description:</h2>
+              
+              <span type="button" id="toggleDescription" class="toggle-button">
+                Show Description <span id="chevronIcon">{% render 'icon-chevron-down' %}</span>
+              </span>
+
+              <div id="descriptionContent" class="hidden-desc">
+                <p>{{ product.description }}</p>
+              </div>
+            </div>
+
+          {% when 'checkout_buttons' %}
+            <div class="buttons">
+              <button type="submit" class="add-to-cart"
+                {% if selected_variant.available == false %} disabled {% endif %}>
+                {% if selected_variant.available == false %}
+                  Sold out
+                {% else %}
+                  Add to cart
+                {% endif %}
+              </button>
+              <button type="submit" class="add-to-wishlist">Add to Wishlist</button>
+            </div>
           {% else %}
-            
         {% endcase %}
       {% endfor %}
     </div>
-    {% endform %}
-  </div>
-
-
-  <script>
-    class VariantSelector extends HTMLElement {
-      constructor() {
-          super();
-          this.addEventListener("change", this.onVariantChange);
-      }
-
-      onVariantChange() {
-          this.getSelectedOptions();
-          this.getSelectedVariant();
-
-          if(this.currentVariant) {
-              this.updateURL();
-              this.updateFormID();
-              this.updatePrice();
-          }
-      }
-
-      getSelectedOptions() {
-          this.options = Array.from(this.querySelectorAll('select'), (select) => select.value);
-          console.log(this.options);
-      }
-
-      getVariantJSON() {
-          this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
-          return this.variantData;
-      }
-
-      getSelectedVariant() {
-          this.currentVariant = this.getVariantJSON().find(
-              (variant) => {
-                  const findings = !variant.options.map(
-                      (option, index) => {
-                          return this.options[index] === option;
-                      }
-                  ).includes(false);
-
-                  if(findings) return variant;
-              }
-          );
-
-          console.log(this.currentVariant);
-      }
-
-      updateURL() {
-          if(!this.currentVariant) return;
-          window.history.replaceState({}, '', `${this.dataset.url}?variant=${this.currentVariant.id}`);
-      }
-
-      updateFormID() {
-          const form_input = document.querySelector("#product-form").querySelector('input[name="id"]');
-          form_input.value = this.currentVariant.id;
-      }
-
-      updatePrice() {
-          fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
-          .then((response) => response.text())
-          .then((responseText) => {
-              const id = `price-${this.dataset.section}`;
-              const html = new DOMParser().parseFromString(responseText, 'text/html');
-
-              const oldPrice = document.getElementById(id);
-              const newPrice = html.getElementById(id);
-
-              if(oldPrice && newPrice) oldPrice.innerHTML = newPrice.innerHTML;
-          });
-      }
+  {% endform %}
+</div>
+<div class="product-grid">
+  {% for recommended_product in product.metafields.custom.recommended_products.value %}
+    {% render 'product-card', product: recommended_product %}
+  {% endfor %}
+</div>
+<script>
+  class VariantSelector extends HTMLElement {
+  constructor() {
+    super();
+    this.addEventListener("click", this.onVariantClick.bind(this));
   }
 
-  customElements.define("variant-selector", VariantSelector);
+  onVariantClick(event) {
+    if (event.target.tagName === 'BUTTON') {
+      this.handleButtonClick(event.target);
+    }
+  }
 
-  </script>
+  handleButtonClick(button) {
+    const isSelected = button.classList.contains('selected');
+    const buttons = button.parentElement.querySelectorAll('.variant-button');
+    buttons.forEach(btn => btn.classList.remove('selected'));
+
+    if (!isSelected) {
+      button.classList.add('selected');
+    }
+
+    this.getSelectedOptions();
+    this.getSelectedVariant();
+
+    if (this.currentVariant) {
+      this.updateURL();
+      this.updateFormID();
+      this.updatePrice();
+    }
+  }
+
+  getSelectedOptions() {
+    this.options = Array.from(this.querySelectorAll('.variant-buttons'), (variantGroup) => {
+      const selectedButton = variantGroup.querySelector('.selected');
+      return selectedButton ? selectedButton.dataset.value : null;
+    });
+  }
+
+  getVariantJSON() {
+    this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
+    return this.variantData;
+  }
+
+  getSelectedVariant() {
+    this.currentVariant = this.getVariantJSON().find(
+      (variant) => {
+        return !variant.options.map((option, index) => this.options[index] === option).includes(false);
+      }
+    );
+  }
+
+  updateURL() {
+    if (!this.currentVariant) return;
+    window.history.replaceState({}, '', `${this.dataset.url}?variant=${this.currentVariant.id}`);
+  }
+
+  updateFormID() {
+    const formInput = document.querySelector("#product-form").querySelector('input[name="id"]');
+    formInput.value = this.currentVariant.id;
+  }
+
+  updatePrice() {
+    fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
+      .then((response) => response.text())
+      .then((responseText) => {
+        const id = `price-${this.dataset.section}`;
+        const html = new DOMParser().parseFromString(responseText, 'text/html');
+        const oldPrice = document.getElementById(id);
+        const newPrice = html.getElementById(id);
+
+        if (oldPrice && newPrice) oldPrice.innerHTML = newPrice.innerHTML;
+      });
+  }
+}
+
+customElements.define("variant-selector", VariantSelector);
+
+</script>
+
+<script>
+ 
+ document.addEventListener('DOMContentLoaded', () => {
+  const toggleButton = document.getElementById('toggleDescription');
+  const descriptionContent = document.getElementById('descriptionContent');
+  const chevronIcon = document.getElementById('chevronIcon');
+
+  toggleButton.addEventListener('click', () => {
+    if (descriptionContent.classList.contains('hidden-desc')) {
+      descriptionContent.classList.remove('hidden-desc');
+      descriptionContent.classList.add('show');
+      toggleButton.firstChild.textContent = 'Hide Description ';
+      chevronIcon.classList.add('rotate');
+    } else {
+      descriptionContent.classList.remove('show');
+      descriptionContent.classList.add('hidden-desc');
+      toggleButton.firstChild.textContent = 'Show Description ';
+      chevronIcon.classList.remove('rotate');
+    }
+  });
+});
+
+
+</script>
+
 
 
   {% schema %}

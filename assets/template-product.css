@@ -1,8 +1,13 @@
 .product-page {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
     padding: 20px;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.product-page form {
+    min-width: 30%;
 }
 
 .product-images {
@@ -37,6 +42,9 @@
 
 .buttons {
     margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  
 }
 
 .add-to-cart,
@@ -48,12 +56,53 @@
     background-color: var(--white-color);
     color: var(--black-color);
     border-radius: 5px;
+    width: 45%;
 }
 
 .add-to-cart:hover,
 .add-to-wishlist:hover {
     background-color: var(--red-color);
 }
+
+/* Container for variant options */
+.variant-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Default style for variant buttons */
+  .variant-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  /* Hover state for variant buttons */
+  .variant-button:hover {
+    background-color: #e0e0e0;
+    border-color: #bbb;
+  }
+  
+  /* Selected state for variant buttons */
+  .variant-button.selected {
+    background-color: #d1e7dd;
+    border-color: #0f5132;
+    color: #0f5132;
+    font-weight: bold;
+  }
+  
+  /* Optional: Styles for disabled state */
+  .variant-button:disabled {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+    color: #6c757d;
+    cursor: not-allowed;
+  }
+  
 
 .description {
     margin-top: 20px;
@@ -63,6 +112,51 @@
     font-size: 20px;
     margin-bottom: 10px;
 }
+
+.hidden-desc {
+    display: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+  }
+
+  .toggle-button {
+    cursor: pointer;
+    color: blue;
+    background: none;
+    border: solid 1px red;
+    font-size: 1em;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    justify-content: space-between;
+    color: red;
+    
+  }
+
+  #chevronIcon {
+    margin-left: 8px;
+    transition: transform 0.5s ease;
+  }
+  
+  #chevronIcon.rotate {
+    transform: rotate(180deg);
+  }
+
+  .toggle-btn-group {
+    display: flex;
+    
+  }
+  
+  .description #descriptionContent.show {
+    display: block;
+    max-height: 1000px; /* Adjust as necessary to fit your content */
+  }
+  
+
+
+
 /* Product Variant Selectors */
 .product-details .sizes select,
 .product-details input[type="number"] {

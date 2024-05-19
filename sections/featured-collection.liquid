@@ -21,7 +21,7 @@
         </div>
         <div class="feature-img">
           <div class="img-text">
-            <h4 class="feature-title">MEN</h4>
+            <h4 class="feature-title">{{ collection.title }}</h4>
             <h6 class="feature-paragraph">115 PRODUCTS</h6>
           </div>
           {% if section.settings.image_1 != blank %}
@@ -49,20 +49,13 @@
     <h2>OUR PRODUCTS</h2>
   </div>
     <div class="product-grid">
-      {% paginate section.settings.featured_collection.products by 4 %}
-        {% for product in section.settings.featured_collection.products %}
+        {% for product in section.settings.featured_collection.products limit: section.settings.number_of_products_to_show %}
           {% render 'product-card', product: product %}
         {% endfor %}
-        {% if paginate.next %}
-          <div class="pagination-container">
-            <div class="load-more-spinner"></div>
-          </div>
-        {% endif %}
-      {% endpaginate %}
     </div>
     <div class="load-btn">
         <button>
-        <a href="{{ routes.all_products_collection_url }}">Show More</a>
+          <a href="{{ routes.all_products_collection_url }}">Show More</a>
         </button>
       </div>
   </div>
@@ -142,6 +135,19 @@
       "id": "image_3_products",
       "label": "Image 3 Products",
       "default": "75 PRODUCTS"
+    },
+    {
+      "type": "range",
+      "id": "number_of_products_to_show",
+      "min":4,
+      "max":12,
+      "default":8,
+      "label": "Number of Products to render"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
     }
   ]
 }

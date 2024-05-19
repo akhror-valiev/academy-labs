@@ -1,9 +1,28 @@
 /* cart.css */
 
 /* General Styles */
+
+
+.cart-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+
+
+
 body {
     font-family: Arial, sans-serif;
   }
+
+
+
+
+
+
   
   .max-w {
     max-width: 1200px;
