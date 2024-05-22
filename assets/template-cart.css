@@ -1,0 +1,110 @@
+<style>
+
+  .cart-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+
+  .main-cart {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    padding: 50px 0;
+    position: relative;
+  }
+
+  .cart-img {
+    display: flex;
+    align-items: center;
+  }
+
+  .cart-heading {
+    position: absolute;
+    top: 0;
+  }
+  
+
+  .cart-quantity-input {
+    width: 50px; /* Adjust the width as needed */
+    padding: 4px; /* Adjust padding as needed */
+    border: 1px solid #ccc; /* Adjust border color as needed */
+    border-radius: 4px; /* Optional: add rounded corners */
+    text-align: center; /* Center the text inside the input */
+}
+
+
+.card-full-body{
+  background-color: black;
+  color:white;
+  padding: 40px 15px 30px 15px;
+}
+.cart-subtotal-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+}
+
+.cart-total-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 60px;
+  border-top: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.cart-h4 {
+  margin: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.cart-p {
+  
+}
+
+
+.cart-total-h4 {
+  padding: 0;
+  margin: 0;
+  
+}
+
+.card-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+.cart-btn-group button {
+  border: 1px solid red;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.cart-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.middle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.section-content{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+</style>

@@ -1,4 +1,5 @@
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
+<div class="section-content">
 <div>
   {% render 'banner-image' %}
 </div> <!-- Close the div for banner image -->
@@ -45,6 +46,7 @@
   </div>
   {% render 'pagination', pagination:paginate %}
   {% endpaginate %}
+</div>
 </div>
 
 

@@ -4,42 +4,65 @@
   <div class="container">
     <div class="logo">
       <a href="/">
-      {% if section.settings.header_logo != blank %}
-        <img src="{{ section.settings.header_logo | image_url }}" width="106" height="24" loading="lazy" alt="Header Logo">
-      {% else %}
-        <img src="{{ "Miralou.png" | asset_url }}" width="106" height="24" loading="lazy" alt="Header Logo" >
-      {% endif %}
+        {% if section.settings.header_logo != blank %}
+          <img src="{{ section.settings.header_logo | image_url }}" width="106" height="24" loading="lazy" alt="Header Logo">
+        {% else %}
+          <img src="{{ "Miralou.png" | asset_url }}" width="106" height="24" loading="lazy" alt="Header Logo">
+        {% endif %}
       </a>
     </div>
     <nav class="main-nav">
-        {% for link in main_menu_linklist %}
-            {% if link.links != blank %}
-                <ul class="relative-click">
-                    <li class="inline-flex">
-                      <a href="{{ link.url }}">{{ link.title }}</a>
-                       {% render 'icon-chevron-down' %}
-                    </li>
-                </ul>
-            {% else %}
-                <ul>
-                  <li><a href="{{ link.url }}" {% if link.url == request.path %}class="active"{% endif %}>{{ link.title }}</a></li>
-                </ul>
-            {% endif %}
-        {% endfor %}
+     
+      {% for link in main_menu_linklist %}
+        {% if link.links != blank %}
+          <ul class="relative-click">
+            <li class="inline-flex">
+              <a href="{{ link.url }}">{{ link.title }}</a>
+              {% render 'icon-chevron-down' %}
+            </li>
+          </ul>
+        {% else %}
+          <ul>
+            <li><a href="{{ link.url }}" {% if link.url == request.path %}class="active"{% endif %}>{{ link.title }}</a></li>
+          </ul>
+        {% endif %}
+      {% endfor %}
     </nav>
     <div class="icon-items">
-     <a href="">
+      <a href="#">
         {% render 'icon-search-item' %}
-     </a>
-     <a href="Login">
+      </a>
+      <a href="Login">
         {% render 'icon-heart' %}
-     </a>
-     <a href="{{ routes.cart_url }}">
+      </a>
+      <a href="" id="cart-icon" class="cart-icon">
         {% render 'icon-cart-item' %}
-     </a>
+      </a>
+
     </div>
   </div>
 </header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var cartType = "{{ settings.cart_type }}"; // This references the global setting
+    var cartIcon = document.getElementById('cart-icon');
+
+    if (cartType === 'drawer') {
+      cartIcon.addEventListener('click', function(event) {
+        event.preventDefault();
+        openDrawerCart(); // Function to open the drawer cart
+      });
+    } else {
+      cartIcon.setAttribute('href', '/cart');
+    }
+  });
+
+  function openDrawerCart() {
+    var drawerCart = document.getElementById('drawer-cart');
+    drawerCart.classList.add('active');
+  }
+</script>
 
 
 {% schema %}
@@ -57,6 +80,12 @@
             "id": "menu",
             "label": "Header Menu",
             "default": "main-menu"
+        },
+        {
+            "type": "text",
+            "id": "main_heading",
+            "label": "Main Heading",
+            "default": "Your Main Heading" // Add a default main heading here
         }
     ],
     "presets": []

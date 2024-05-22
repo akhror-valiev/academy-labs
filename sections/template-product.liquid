@@ -2,6 +2,7 @@
 {{ 'featured-collection.css' | asset_url | stylesheet_tag }}
 
 {% assign selected_variant = product.selected_or_first_available_variant %}
+<div class="section-content">
 <div class="product-page">
   <div class="product-images">
     {% for media in product.media %}
@@ -88,6 +89,8 @@
     {% render 'product-card', product: recommended_product %}
   {% endfor %}
 </div>
+</div>
+
 <script>
   class VariantSelector extends HTMLElement {
   constructor() {
