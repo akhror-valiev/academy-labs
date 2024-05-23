@@ -53,18 +53,7 @@
                 <input type="number" name="quantity" id="Quantity-{{ section.id }}" value="1" min="1">
               </div>
             </div> {% endcomment %}
-          {% when 'description' %}
-            <div class="description">
-              <h2>Description:</h2>
-              
-              <span type="button" id="toggleDescription" class="toggle-button">
-                Show Description <span id="chevronIcon">{% render 'icon-chevron-down' %}</span>
-              </span>
-
-              <div id="descriptionContent" class="hidden-desc">
-                <p>{{ product.description }}</p>
-              </div>
-            </div>
+    
 
           {% when 'checkout_buttons' %}
             <div class="buttons">
@@ -78,13 +67,26 @@
               </button>
               <button type="submit" class="add-to-wishlist">Add to Wishlist</button>
             </div>
+              <div class="description">
+                <h2>Description:</h2>
+                
+                <span type="button" id="toggleDescription" class="toggle-button">
+                  Show Description <span id="chevronIcon">{% render 'icon-chevron-down' %}</span>
+                </span>
+  
+                <div id="descriptionContent" class="hidden-desc">
+                  <p>{{ product.description }}</p>
+                </div>
+              </div>
           {% else %}
         {% endcase %}
       {% endfor %}
     </div>
+    
   {% endform %}
+  
 </div>
-<div class="recommendation-product-container">
+<div class="product-recommend-wrapper">
   {% for recommended_product in product.metafields.custom.recommended_products.value %}
     {% render 'product-card', product: recommended_product %}
   {% endfor %}
@@ -197,8 +199,13 @@ customElements.define("variant-selector", VariantSelector);
 </script>
 
 <style>
-  .recommendation-product-container {
-    max-width: 80%;
+  .product-recommend-wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 40px;
   }
 </style>
 

@@ -1,48 +1,113 @@
 {{ 'latest-news.css' | asset_url | stylesheet_tag }}
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
 <div class="news-container">
   <div class="news-content">
     <h4>LATEST NEWS</h4>
     <p class="news-p">{{ section.settings.news_textarea }}</p>
-    <div class="news-image-container">
-      <div class="news-image">
-        {% if section.settings.news_image1 != blank %}
-          <img src="{{ section.settings.news_image1 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
-        {% else %}
-          <img src="{{ "one.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy" >
-        {% endif %}
-        <div class="news-image-info">
-          <p>19.10.2024</p>
-          <h6>{{ section.settings.news_story1 }}</h6>
-          <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
+    <div class="swiper-container news-swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide news-image">
+          {% if section.settings.news_image1 != blank %}
+            <img src="{{ section.settings.news_image1 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
+          {% else %}
+            <img src="{{ "one.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy">
+          {% endif %}
+          <div class="news-image-info">
+            <p>19.10.2024</p>
+            <h6>{{ section.settings.news_story1 }}</h6>
+            <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
+          </div>
+        </div>
+        <div class="swiper-slide news-image">
+          {% if section.settings.news_image2 != blank %}
+            <img src="{{ section.settings.news_image2 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
+          {% else %}
+            <img src="{{ "two.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy">
+          {% endif %}
+          <div class="news-image-info">
+            <p>10.10.2024</p>
+            <h6>{{ section.settings.news_story2 }}</h6>
+            <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
+          </div>
+        </div>
+        <div class="swiper-slide news-image">
+          {% if section.settings.news_image3 != blank %}
+            <img src="{{ section.settings.news_image3 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
+          {% else %}
+            <img src="{{ "three.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy">
+          {% endif %}
+          <div class="news-image-info">
+            <p>21.10.2024</p>
+            <h6>{{ section.settings.news_story3 }}</h6>
+            <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
+          </div>
+        </div>
+        <!-- Duplicate slides to ensure continuous loop -->
+        <div class="swiper-slide news-image">
+          {% if section.settings.news_image1 != blank %}
+            <img src="{{ section.settings.news_image1 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
+          {% else %}
+            <img src="{{ "one.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy">
+          {% endif %}
+          <div class="news-image-info">
+            <p>19.10.2024</p>
+            <h6>{{ section.settings.news_story1 }}</h6>
+            <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
+          </div>
+        </div>
+        <div class="swiper-slide news-image">
+          {% if section.settings.news_image2 != blank %}
+            <img src="{{ section.settings.news_image2 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
+          {% else %}
+            <img src="{{ "two.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy">
+          {% endif %}
+          <div class="news-image-info">
+            <p>10.10.2024</p>
+            <h6>{{ section.settings.news_story2 }}</h6>
+            <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
+          </div>
+        </div>
+        <div class="swiper-slide news-image">
+          {% if section.settings.news_image3 != blank %}
+            <img src="{{ section.settings.news_image3 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
+          {% else %}
+            <img src="{{ "three.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy">
+          {% endif %}
+          <div class="news-image-info">
+            <p>21.10.2024</p>
+            <h6>{{ section.settings.news_story3 }}</h6>
+            <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
+          </div>
         </div>
       </div>
-      <div class="news-image">
-        {% if section.settings.news_image2 != blank %}
-          <img src="{{ section.settings.news_image2 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
-        {% else %}
-          <img src="{{ "two.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy" >
-        {% endif %}
-        <div class="news-image-info">
-          <p>10.10.2024</p>
-          <h6>{{ section.settings.news_story2 }}</h6>
-          <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
-        </div>
-      </div>
-      <div class="news-image">
-        {% if section.settings.news_image3 != blank %}
-          <img src="{{ section.settings.news_image3 | image_url }}" width="390" height="304" loading="lazy" alt="Header Logo">
-        {% else %}
-          <img src="{{ "three.jpeg" | asset_url }}" width="390" height="304" loading="lazy" alt="Header Logo" loading="lazy" >
-        {% endif %}
-        <div class="news-image-info">
-          <p>21.10.2024</p>
-          <h6>{{ section.settings.news_story3 }}</h6>
-          <a href="#" class="news-button">Read more{% render 'icon-arrow-right' %}</a>
-        </div>
-      </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var newsSwiper = new Swiper('.news-swiper-container', {
+      loop: true,
+      slidesPerView: 3, // Show 3 images at once
+      slidesPerGroup: 3, // Move 3 slides at a time
+      spaceBetween: 10,
+      // Enable mousewheel control
+      mousewheel: {
+        invert: false,
+      },
+    });
+  });
+</script>
+
+
 
 {% schema %}
 {
