@@ -1,0 +1,40 @@
+
+{% assign font_header = settings.type_header_font %}
+{% assign font_body = settings.type_body_font %}
+{% assign font_header_size = settings.heading_scale %}
+{% assign font_body_size = settings.body_scale %}
+
+{% assign color_background = settings.background %}
+{% assign color_background_gradient = settings.background_gradient %}
+{% assign color_text = settings.text %}
+{% assign color_button = settings.button %}
+{% assign color_button_label = settings.button_label %}
+{% assign color_secondary_button_label = settings.secondary_button_label %}
+
+{{ font_header | font_face }}
+{{ font_body | font_face }}
+
+h1, h2, h3, h4, h5, h6, button {
+    font-family: {{ font_header.family }}, {{ font_header.fallback_families }};
+    font-size: {{ font_header_size }}%;
+}
+
+body {
+    font-family: {{ font_body.family }}, {{ font_body.fallback_families }};
+    font-size: {{ font_body_size }}%;
+    background-color: {{ color_background }};
+    color: {{ color_text }};
+}
+
+.header {
+    background: {{ color_background_gradient }};
+}
+
+button {
+    background-color: {{ color_button }};
+    color: {{ color_button_label }};
+}
+
+.secondary-button {
+    color: {{ color_secondary_button_label }};
+}

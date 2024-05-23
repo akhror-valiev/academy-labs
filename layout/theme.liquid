@@ -10,6 +10,7 @@
     {{ content_for_header }}
     <!-- Header hook for plugins -->
     {{ 'global.css' | asset_url | stylesheet_tag }}
+    {{ 'font-style.css' | asset_url | stylesheet_tag }}
     {{ 'application.js' | asset_url | script_tag }}
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
@@ -17,6 +18,9 @@
   </head>
   <body>
     {% section 'header' %}
+    {% if settings.cart_type == 'drawer' %}
+      {% include 'cart-drawer' %}
+    {% endif %}
     <main role="main">
       {{ content_for_layout }}
     {% section 'cart-drawer' %}

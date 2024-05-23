@@ -10,6 +10,13 @@
         <p class="p-brand">{{ product.name }}</p>
         <p class="p-models">{{ product.title }}</p>
         <p class="p-price">{{ product.price | money }}</p>
+        
+        {% if product.metafields.custom.expected_date != blank %}
+            <p class="release-date">
+                Release Date: {{ product.metafields.custom.expected_date | date: "%B %d, %Y" }}
+            </p>
+        {% endif %}
+
         <a href="{{ product.url }}" class="view-btns">View Product</a>
     </div>
 </div>

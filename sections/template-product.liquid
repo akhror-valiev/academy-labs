@@ -84,7 +84,7 @@
     </div>
   {% endform %}
 </div>
-<div class="product-grid">
+<div class="recommendation-product-container">
   {% for recommended_product in product.metafields.custom.recommended_products.value %}
     {% render 'product-card', product: recommended_product %}
   {% endfor %}
@@ -195,6 +195,12 @@ customElements.define("variant-selector", VariantSelector);
 
 
 </script>
+
+<style>
+  .recommendation-product-container {
+    max-width: 80%;
+  }
+</style>
 
 
 
