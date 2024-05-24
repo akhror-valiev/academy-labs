@@ -68,21 +68,22 @@
           </div>
           <button type="submit" name="checkout" class="cart-drawer-button">Checkout</button>
         </footer>
-        <h2>hello</h2>
         <div class="recc-container">
   <section class="recc-wrapper" id="product-rec">
-    <div class="swiper-container">
+    <div class="swiper-container product-swiper-container">
       <div class="swiper-wrapper" id="product-rec-body">
         <!-- Slides will be inserted here -->
       </div>
       <!-- Add Pagination -->
-      <div class="swiper-pagination"></div>
+      <div class="swiper-pagination product-swiper-pagination"></div>
       <!-- Add Navigation -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next product-swiper-button-next"></div>
+      <div class="swiper-button-prev product-swiper-button-prev"></div>
     </div>
   </section>
 </div>
+
+
 
         
       {% endif %}
@@ -91,64 +92,65 @@
 </div>
 
 <script>
- 
- 
- var productRecommendationBody = document.getElementById('product-rec-body');
+  var productRecommendationBody = document.getElementById('product-rec-body');
 
-fetch('/recommendations/products.json?product_id={{ product.id }}')
-  .then(resp => resp.json())
-  .then(({ products }) => {
-    console.log(products);
+  fetch('/recommendations/products.json?product_id={{ product.id }}')
+    .then(resp => resp.json())
+    .then(({ products }) => {
+      console.log(products);
 
-    if (products.length > 0) {
-      products.forEach(function(product, index) {
-        var card = '<div class="swiper-slide rec-cart-drawer">';
-        card += '<div class="inner-card">';
+      if (products.length > 0) {
+        products.forEach(function(product, index) {
+          var card = '<div class="swiper-slide rec-cart-drawer">';
+          card += '<div class="inner-card">';
 
-        if (product.images.length > 0) {
-          card += '<img class="rec-image" src="' + product.images[0] + '" alt="' + product.title + '">';
-        }
+          if (product.images.length > 0) {
+            card += '<img class="rec-image" src="' + product.images[0] + '" alt="' + product.title + '">';
+          }
 
-        card += '<div class="inner-card-title">';
-        card += '<h3><a href="' + product.url + '">' + product.title + '</a></h3>';
-        card += '<p>$' + product.price + '</p>';
-        card += '<button class="add-to-cart-button" data-product-id="' + product.id + '">Add to Cart</button>';
-        card += '</div></div></div>';
+          card += '<div class="inner-card-title">';
+          card += '<h3><a href="' + product.url + '">' + product.title + '</a></h3>';
+          card += '<p>$' + product.price + '</p>';
+          card += '<button class="add-to-cart-button" data-product-id="' + product.id + '">Add to Cart</button>';
+          card += '</div></div></div>';
 
-        productRecommendationBody.innerHTML += card;
-      });
-
-      // Initialize Swiper only if there are more than 2 products
-      if (products.length > 2) {
-        var swiper = new Swiper('.swiper-container', {
-          slidesPerView: 1,
-          spaceBetween: 10,
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-          breakpoints: {
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 30,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 40,
-            },
-          },
+          productRecommendationBody.innerHTML += card;
         });
+
+        // Initialize Swiper only if there are more than 2 products
+        if (products.length > 2) {
+          var swiper = new Swiper('.product-swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            navigation: {
+              nextEl: '.product-swiper-button-next',
+              prevEl: '.product-swiper-button-prev',
+            },
+            pagination: {
+              el: '.product-swiper-pagination',
+              clickable: true,
+            },
+            breakpoints: {
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 40,
+              },
+            },
+          });
+        }
       }
-    }
-  });
-
-
-
+    });
 </script>
+
+
 
 <script>
 
@@ -614,35 +616,46 @@ document.addEventListener('DOMContentLoaded', function() {
   background-color: #c51414;
 }
 
-.swiper-button-next, .swiper-button-prev {
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    position: absolute;
+/* Scoped CSS for product-swiper-container */
 
-  }
 
-  .swiper-button-next {
-    right: 10px;
-    position: absolute;
-  }
 
-  .swiper-button-prev {
-    left: 10px;
-
-  }
-
-  .swiper-button-next::after, .swiper-button-prev::after {
-    font-size: 16px;
-    color: white;
-  }
-
-  .swiper-wrapper {
-    width: 100%;
+.product-swiper-container .swiper-button-next, .product-swiper-container .swiper-button-prev {
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  position: absolute;
+  bottom:100px;
 }
+
+.product-swiper-container .swiper-button-next {
+  right: 10px;
+}
+
+.product-swiper-container .swiper-button-prev {
+  left: 10px;
+}
+
+.product-swiper-container .swiper-button-next::after, .product-swiper-container .swiper-button-prev::after {
+  font-size: 16px;
+  color: white;
+}
+
+.product-swiper-container .swiper-wrapper {
+  width: 100%;
+}
+
+/* Override global styles only for product-swiper-container */
+.product-swiper-container .swiper-pagination {
+  /* Your custom styles for pagination */
+}
+
+.product-swiper-container .swiper-slide {
+  /* Your custom styles for slides */
+}
+
 
 
 </style>

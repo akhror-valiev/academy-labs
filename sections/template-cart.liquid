@@ -40,7 +40,6 @@
                       </td>
                       <td class="py-4-price">
                         <span class="price-value">{{ item.line_price | money }}</span>
-                        <span class="loading-icon" style="display: none;">{% render 'icon-loader' %}</span>
                       </td>
                     </tr>
                     {% endfor %}
@@ -61,8 +60,8 @@
                 </div>
               </div>
               <div class="cart-btn-group">
-                <button type="submit" name="checkout">Proceed to checkout</button>
-                <button type="submit" name="update">
+                <button class="cart-btn-submit" type="submit" name="checkout">Proceed to checkout</button>
+                <button class="cart-btn-submit" type="submit" name="update">
                   <a href="{{ routes.all_products_collection_url }}" class="cartp-text">Continue shopping</a>
                 </button>
               </div>
@@ -79,7 +78,7 @@
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse quisquam quasi nam officiis suscipit quos repellendus tempora.</p>
     </div>
     <div>
-      <button class="middle-btn">Go to Shopping</button>
+      <button class="middle-btn"><a href="{{ routes.all_products_collection_url }}">Go to Shopping</a></button>
     </div>
   </div>
   {% endif %}

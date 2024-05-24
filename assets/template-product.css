@@ -89,9 +89,9 @@
   
   /* Selected state for variant buttons */
   .variant-button.selected {
-    background-color: #d1e7dd;
-    border-color: #0f5132;
-    color: #0f5132;
+    background-color: var(--white-color);
+    border-color: var(--red-color);
+    color: var(--red-color);
     font-weight: bold;
   }
   
