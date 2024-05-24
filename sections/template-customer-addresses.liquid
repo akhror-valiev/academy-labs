@@ -1,0 +1,269 @@
+<div class="container py-5" x-data="{ new_address: false }" x-cloak>
+    <div class="row align-items-center justify-content-between mb-4">
+        <h1 class="col text-secondary h4 fw-bold">Addresses</h1>
+        <div class="col-auto">
+            <button x-on:click="new_address = true" type="button" class="btn btn-dark me-2">Create new address</button>
+            <a href="{{ routes.account_url }}" class="btn btn-link text-decoration-underline">Back to account</a>
+        </div>
+    </div>
+
+    <div x-show="new_address" class="position-fixed top-0 bottom-0 start-0 end-0 bg-dark bg-opacity-50 overflow-auto z-50">
+        <div class="position-relative mx-auto bg-white border p-4 mt-5" style="max-width: 28rem;">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="h6">New address</h2>
+                <button x-on:click="new_address = false" class="btn btn-link text-secondary p-0">{% render 'icon-close' %}</button>
+            </div>
+
+            {% form 'customer_address', customer.new_address %}
+                <div class="mb-3">
+                    <label for="address_fname_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">First name</label>
+                    <input type="text" name="address[first_name]" id="address_fname_{{ form.id }}" value="{{ form.first_name }}" class="form-control" autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label for="address_lname_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Last name</label>
+                    <input type="text" name="address[last_name]" id="address_lname_{{ form.id }}" value="{{ form.last_name }}" class="form-control" autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label for="address_company_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Company</label>
+                    <input type="text" name="address[company]" id="address_company_{{ form.id }}" value="{{ form.company }}" class="form-control" autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label for="address_address1_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Address 1</label>
+                    <input type="text" name="address[address1]" id="address_address1_{{ form.id }}" value="{{ form.address1 }}" class="form-control" autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label for="address_address2_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Address 2</label>
+                    <input type="text" name="address[address2]" id="address_address2_{{ form.id }}" value="{{ form.address2 }}" class="form-control" autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label for="address_city_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">City</label>
+                    <input type="text" name="address[city]" id="address_city_{{ form.id }}" value="{{ form.city }}" class="form-control" autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label for="address_country_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Country</label>
+                    <select name="address[country]" id="address_country_{{ form.id }}" value="{{ form.country }}" class="form-select" data-country-selector data-id="{{ form.id }}">
+                        {{ all_country_option_tags }}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="address_province_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Province</label>
+                    <select name="address[province]" id="address_province_{{ form.id }}" value="{{ form.province }}" class="form-select"></select>
+                </div>
+                <div class="mb-3">
+                    <label for="address_zip_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Postal/ZIP code</label>
+                    <input type="text" name="address[zip]" id="address_zip_{{ form.id }}" value="{{ form.zip }}" class="form-control" autocomplete="off">
+                </div>
+                <div class="mb-3">
+                    <label for="address_phone_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Phone number</label>
+                    <input type="tel" name="address[phone]" id="address_phone_{{ form.id }}" value="{{ form.phone }}" class="form-control" autocomplete="off">
+                </div>
+                <div class="mb-3 form-check">
+                    {{ form.set_as_default_checkbox }}
+                    <label for="address_default_address_{{ form.id }}" class="form-check-label text-uppercase text-secondary fw-bold small">Set as default address</label>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-dark w-100">Create address</button>
+                    <button type="reset" class="btn btn-outline-secondary w-100">Cancel</button>
+                </div>
+            {% endform %}
+        </div>
+    </div>
+
+    <div>
+        {% paginate customer.addresses by 10 %}
+            <div class="row g-3">
+                {% for address in customer.addresses %}
+                    <div class="col-md-6 col-lg-3" x-data="{ address_{{ address.id }}: false }">
+                        <div class="card border p-2">
+                            {% if address == customer.default_address %}
+                                <div class="badge bg-success text-white">Default</div>
+                            {% endif %}
+                            <div class="card-body text-center">
+                                <p>{{ address | format_address }}</p>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button x-on:click="address_{{ address.id }} = true" class="btn btn-dark w-100 btn-sm">Edit</button>
+                                <button class="btn btn-outline-secondary w-100 btn-sm" data-url="{{ address.url }}" data-delete-address>Delete</button>
+                            </div>
+                            <form method="post" action="{{ address.url }}">
+                                <input type="hidden" name="_method" value="delete">
+                            </form>
+                        </div>
+
+                        <div x-show="address_{{ address.id }}" class="position-fixed top-0 bottom-0 start-0 end-0 bg-dark bg-opacity-50 overflow-auto z-50">
+                            <div class="position-relative mx-auto bg-white border p-4 mt-5" style="max-width: 28rem;">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h2 class="h6">Edit address</h2>
+                                    <button x-on:click="address_{{ address.id }} = false" class="btn btn-link text-secondary p-0">{% render 'icon-close' %}</button>
+                                </div>
+
+                                {% form 'customer_address', address %}
+                                    <div class="mb-3">
+                                        <label for="address_fname_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">First name</label>
+                                        <input type="text" name="address[first_name]" id="address_fname_{{ form.id }}" value="{{ form.first_name }}" class="form-control" autocomplete="off">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address_lname_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Last name</label>
+                                        <input type="text" name="address[last_name]" id="address_lname_{{ form.id }}" value="{{ form.last_name }}" class="form-control" autocomplete="off">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address_company_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Company</label>
+                                        <input type="text" name="address[company]" id="address_company_{{ form.id }}" value="{{ form.company }}" class="form-control" autocomplete="off">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address_address1_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Address 1</label>
+                                        <input type="text" name="address[address1]" id="address_address1_{{ form.id }}" value="{{ form.address1 }}" class="form-control" autocomplete="off">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address_address2_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Address 2</label>
+                                        <input type="text" name="address[address2]" id="address_address2_{{ form.id }}" value="{{ form.address2 }}" class="form-control" autocomplete="off">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address_city_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">City</label>
+                                        <input type="text" name="address[city]" id="address_city_{{ form.id }}" value="{{ form.city }}" class="form-control" autocomplete="off">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address_country_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Country</label>
+                                        <select name="address[country]" id="address_country_{{ form.id }}" value="{{ form.country }}" class="form-select" data-country-selector data-id="{{ form.id }}">
+                                            {{ all_country_option_tags }}
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address_province_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Province</label>
+                                        <select name="address[province]" id="address_province_{{ form.id }}" value="{{ form.province }}" class="form-select"></select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address_zip_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Postal/ZIP code</label>
+                                        <input type="text" name="address[zip]" id="address_zip_{{ form.id }}" value="{{ form.zip }}" class="form-control" autocomplete="off">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="address_phone_{{ form.id }}" class="form-label text-uppercase text-secondary fw-bold small">Phone number</label>
+                                        <input type="tel" name="address[phone]" id="address_phone_{{ form.id }}" value="{{ form.phone }}" class="form-control" autocomplete="off">
+                                    </div>
+                                    <div class="mb-3 form-check">
+                                        {{ form.set_as_default_checkbox }}
+                                        <label for="address_default_address_{{ form.id }}" class="form-check-label text-uppercase text-secondary fw-bold small">Set as default address</label>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-dark w-100">Update address</button>
+                                        <button type="reset" class="btn btn-outline-secondary w-100">Cancel</button>
+                                    </div>
+                                {% endform %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            {% include 'pagination' %}
+        {% endpaginate %}
+    </div>
+</div>
+
+
+<script>
+    class CustomerAddress {
+        constructor() {
+            this.initCustomerAddress();
+            this.customerAddressesSelector();
+            this.initDeleteAddressButtons();
+        }
+
+        initDeleteAddressButtons() {
+            const deleteButtons = document.querySelectorAll("button[data-delete-address]");
+            if(deleteButtons.length < 1) return;
+
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", function(e) {
+                    var url = this.dataset.url;
+
+                    var confirmation = window.confirm("Do you really wish to delete this address?");
+
+                    if(confirmation) {
+                        document.querySelector(`form[action="${url}"]`).submit();
+                    }
+                })
+            })
+        }
+
+        initCustomerAddress() {
+            const allAddressesSelector = document.querySelectorAll("select[data-country-selector]");
+            if(allAddressesSelector.length < 1) return;
+
+            //console.log(allAddressesSelector);
+
+            allAddressesSelector.forEach(select => {
+                var selectedCountry = this.getSelectedCountry(select);
+
+                if(!selectedCountry) return;
+
+                var provinces = selectedCountry.dataset.provinces;
+                var arrayOfProvince = JSON.parse(provinces);
+
+                var provinceSelector = document.querySelector(`#address_province_${select.dataset.id}`);
+
+                if(arrayOfProvince.length < 1) {
+                    provinceSelector.setAttribute('disabled', 'disabled');
+                } else {
+                    provinceSelector.removeAttribute('disabled');
+                }
+
+                provinceSelector.innerHTML = '';
+                var options = '';
+                for(var index = 0; index < arrayOfProvince.length; index++) {
+                    if(arrayOfProvince[index][0] === provinceSelector.getAttribute('value')) {
+                        options += `<option value="${arrayOfProvince[index][0]}" selected>${arrayOfProvince[index][0]}</option>`;
+                    } else {
+                        options += `<option value="${arrayOfProvince[index][0]}">${arrayOfProvince[index][0]}</option>`;
+                    }
+                }
+
+                provinceSelector.innerHTML = options;
+            })
+        }
+
+        getSelectedCountry(select) {
+            var option, selectedOption;
+            for(var index = 0; index < select.options.length; index++) {
+                option = select.options[index];
+
+                if(option.value === select.getAttribute('value')) {
+                    selectedOption = option;
+                    selectedOption.setAttribute('selected', 'selected');
+                    break;
+                }
+            }
+
+            return selectedOption;
+        }
+    
+        customerAddressesSelector() {
+            const addressesSelector = document.querySelectorAll("select[data-country-selector]");
+            if(addressesSelector.length < 1) return;
+
+            addressesSelector.forEach(select => {
+                select.addEventListener('change', function(e) {
+                    var provinces = this.options[this.selectedIndex].dataset.provinces;
+                    var arrayOfProvince = JSON.parse(provinces);
+
+                    var provinceSelector = document.querySelector(`#address_province_${this.dataset.id}`);
+
+                    if(arrayOfProvince.length < 1) {
+                        provinceSelector.setAttribute('disabled', 'disabled');
+                    } else {
+                        provinceSelector.removeAttribute('disabled');
+                    }
+
+                    provinceSelector.innerHTML = '';
+                    var options = '';
+                    for(var index = 0; index < arrayOfProvince.length; index++ ) {
+                        options += `<option value="${arrayOfProvince[index][0]}">${arrayOfProvince[index][0]}</option>`;
+                    }
+
+                    provinceSelector.innerHTML = options;
+                });
+            });
+        }
+    }
+
+    const customerAddress = new CustomerAddress();
+</script>

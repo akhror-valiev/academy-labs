@@ -7,13 +7,19 @@
     <meta name="description" content="{{ page_description | escape }}">
     <link rel="canonical" href="{{ canonical_url }}">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    
     {{ content_for_header }}
     <!-- Header hook for plugins -->
+
+    <!-- CSS files -->
+    {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
     {{ 'global.css' | asset_url | stylesheet_tag }}
     {{ 'font-style.css' | asset_url | stylesheet_tag }}
-    {{ 'application.js' | asset_url | script_tag }}
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     {% include 'css-variables' %}
   </head>
   <body>
@@ -23,8 +29,18 @@
     {% endif %}
     <main role="main">
       {{ content_for_layout }}
-    {% section 'cart-drawer' %}
+      {% section 'cart-drawer' %}
     </main>
+
     {% section 'footer' %}
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="{{ 'bootstrap.bundle.min.js' | asset_url }}"></script>
+
+    <!-- Application JavaScript -->
+    <script src="{{ 'application.js' | asset_url }}"></script>
   </body>
 </html>
