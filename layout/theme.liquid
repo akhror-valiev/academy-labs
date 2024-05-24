@@ -12,13 +12,11 @@
     <!-- Header hook for plugins -->
 
     <!-- CSS files -->
-    {{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
     {{ 'global.css' | asset_url | stylesheet_tag }}
     {{ 'font-style.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 
-    <!-- Alpine.js -->
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+   
 
     {% include 'css-variables' %}
   </head>
@@ -34,12 +32,8 @@
 
     {% section 'footer' %}
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Bootstrap JavaScript -->
-    <script src="{{ 'bootstrap.bundle.min.js' | asset_url }}"></script>
-
+     <!-- Alpine.js -->
+     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Application JavaScript -->
     <script src="{{ 'application.js' | asset_url }}"></script>
   </body>
