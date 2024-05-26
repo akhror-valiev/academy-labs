@@ -9,14 +9,89 @@
         {{ 'product-1' | placeholder_svg_tag }}
     {% endif %}
     <div class="product-details">
-        <p class="p-brand">{{ product.name }}</p>
+        <p class="p-brand">{{ product.vendor }}</p>
         <p class="p-models">{{ product.title }}</p>
         <p class="p-price">{{ product.price | money }}</p>
         <a href="{{ product.url }}" class="view-btns">View Product</a>
+        <div class="product-form">
+            <form method="post" action="/cart/add">
+                <label for="variant-select-{{ product.id }}">Select Variant:</label>
+                <select id="variant-select-{{ product.id }}" name="id">
+                    {% for variant in product.variants %}
+                        <option value="{{ variant.id }}">{{ variant.title }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+            </form>
+        </div>
     </div>
 </div>
 
+
+
+
+
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('.product-form form');
+
+    forms.forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+
+            fetch('/cart/add.js', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Product added to cart:', data);
+                // Optionally, update the cart UI or show a confirmation message
+                
+            })
+            .catch(error => {
+                console.error('Error adding product to cart:', error);
+            });
+        });
+    });
+});
+
+
+</script>
+
 <style>
+
+.product-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e1e1e1;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.product-form {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.product-card:hover .product-form {
+    display: block;
+}
+
+
+
     /* Modal Styles */
     .modal {
         display: none;
