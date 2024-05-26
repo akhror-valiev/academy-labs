@@ -32,7 +32,7 @@
 
 
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     const forms = document.querySelectorAll('.product-form form');
 
     forms.forEach(form => {
@@ -51,8 +51,7 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Product added to cart:', data);
-                // Optionally, update the cart UI or show a confirmation message
-                
+
             })
             .catch(error => {
                 console.error('Error adding product to cart:', error);
@@ -60,8 +59,6 @@
         });
     });
 });
-
-
 </script>
 
 <style>
@@ -70,7 +67,20 @@
     position: relative;
     overflow: hidden;
     padding: 10px;
+    border: 1px solid #e1e1e1;
     transition: all 0.3s ease;
+}
+
+.product-details {
+    position: relative;
+}
+
+.view-btns {
+    display: block;
+    margin: 10px 0;
+    cursor: pointer;
+    z-index: 1; /* Ensure it stays on top */
+    position: relative;
 }
 
 .product-form {
@@ -81,25 +91,24 @@
     right: 0;
     background: white;
     padding: 10px;
+    z-index: 0; /* Ensure it appears below the "View Product" button */
     transition: all 0.3s ease;
 }
 
-.product-card:hover .product-form {
+.product-card:hover .product-form,
+.product-card:hover .view-btns {
     display: block;
-    margin-top: 20px;
-    padding: 10px;
+    margin: 30px;
 }
 
 .add-to-cart-btn {
-    padding: -3px;
-    margin-top: 3px;
+    padding: 5px 10px;
+    margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    color: white
+    background-color: #000;
+    color: white;
 }
-
-
-
     /* Modal Styles */
     .modal {
         display: none;
